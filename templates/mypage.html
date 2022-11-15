@@ -55,6 +55,7 @@
         }
 
         .title {
+            margin-top: 10px;
             font-size: 20px;
             font-family: var(--font-point)
         }
@@ -76,9 +77,10 @@
 
 
         .graph-box {
-            width: 60%;
-
-            background-color: var(--color-2);
+            width: 55%;
+            border-radius: 10px;
+            background-color: var(--color-4);
+            margin-left: 10px;
         }
 
 
@@ -92,6 +94,15 @@
 
             display: flex;
             flex-direction: row;
+        }
+
+        .til-graph {
+            margin-top: 10px;
+        }
+
+        .til-circle {
+            width: 35px;
+            margin: 5px;
         }
 
         .my-til-score, .my-til-rank {
@@ -234,9 +245,6 @@
         }
 
 
-
-
-
         .delete-check-box {
             width: 50%;
             height: 50%;
@@ -250,7 +258,7 @@
 
         }
 
-        .delete-check-box > button{
+        .delete-check-box > button {
             padding: 10px;
             margin: 5px;
             font-size: 13px;
@@ -264,11 +272,13 @@
 
         }
 
-         button:hover {
+        button:hover {
             border: 2px solid white;
         }
 
     </style>
+
+
     <script>
 
         $(document).ready(function () {
@@ -283,7 +293,7 @@
 
                     for (let i = 0; i < question_list.length; i++) {
                         console.log(question_list[i]);
-                        let question_id= question_list[i]['question_id'];
+                        let question_id = question_list[i]['question_id'];
                         let main_ability = question_list[i]['main_ability'];
                         let question_title = question_list[i]['question_title'];
                         let q_heart_count = question_list[i]['q_heart_count'];
@@ -302,6 +312,18 @@
 
 
                         $('.my-post-list').append(temp_html)
+                    }
+
+
+                    const now = new Date();
+                    const month_last_day = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                    const month_day_count = month_last_day.getDate();
+
+                    for (let j = 0; j < month_day_count; j++) {
+                        let temp_html = `<img class="til-circle" src='../static/img/circle1.png'>`
+
+                        $('.til-graph').append(temp_html)
+
                     }
 
 
@@ -366,7 +388,7 @@
                     url: "/mypage/til/keeping",
                     data: {
                         'til_url': url,
-                        'til_count': til_count,
+                        'til_count': {{til_count}},
                     },
                     success: function (response) {
                         alert(response['message']);
@@ -396,11 +418,11 @@
         </svg>
     </div>
     <div class="middle-box">
-        <p style="font-size: 26px; margin-left: 30px; font-family: var(--font-point);"> {{ user_name }}님의 TIL 현황</p>
+        <p style="font-size: 26px;font-family: var(--font-point); margin-left: 30px;"> {{ user_name }}님의 TIL 현황</p>
 
         <div class="til-box">
             <div class="graph-box">
-                <p style="font-size: 20px; margin-left: 30px; font-family: var(--font-point);">활동 그래프</p>
+                <p class="title" style=" margin-left: 30px;">활동 그래프</p>
                 <div class="til-graph">
 
                 </div>
@@ -430,7 +452,6 @@
             </div>
         </div>
     </div>
-
     <div class="my-post">
         <p class="title" style="margin-top: 30px; margin-left: 30px;"> 나의 게시글 목록</p>
         <div class="my-post-list">
