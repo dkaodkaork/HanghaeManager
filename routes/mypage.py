@@ -10,16 +10,18 @@ mypage = Blueprint("mypage", __name__, url_prefix="/mypage")
 # 마이 페이지 기본 정보 get
 @mypage.route('/')
 def mypage_home():
+
     user_id = "qwer"
-    user = db.testUsers.find_one({'user_id': user_id}, {'_id': False})
+    user = db.users.find_one({'user_id': user_id}, {'_id': False})
 
     return render_template('mypage.html', user_name=user['user_name'], til_count=user['til_count'])
+
 
 # 내가 작성했던 리스트 get
 @mypage.route('/data')
 def mypage_data():
     user_id = "qwer"
-    question_list = list(db.testQuestions.find({'user_id': user_id}, {'_id': False}))
+    question_list = list(db.question.find({'user_id': user_id}, {'_id': False}))
     print(question_list)
 
     return jsonify({'question_list': question_list}), 200
@@ -60,8 +62,29 @@ def post_update():
 
     # 같다면 update
     if post['user_id'] == user_id:
-        db.question.update_one({'question_id': question_id}, {'$set': {'question_detail': question_detail}})
+        db.question.update_one({'question_id': int(question_id)}, {'$set': {'question_detail': question_detail}})
         return jsonify({"message": "success"}), 200
     else:
         # 같지 않다면 fail
-        return jsonify({"message": "fail"}), 200
+        return jsonify({"message": "fail"}), 203
+
+
+# 게시글 삭제
+@mypage.route('/deletion', methods=['POST'])
+def post_delete():
+
+    user_id = "qwer"
+
+    question_id = request.form['question_id']
+
+    # user_id와 question_id에 저장된 user_id가 맞는지 확인 하기 위한 find
+    post = db.question.find_one({'question_id': question_id}, {'_id': False})
+    print(post)
+    # 같다면 delete
+    if post['user_id'] == user_id:
+        db.users.delete_one({'question_id': int(question_id)})
+        # question의 answer들도 삭제하는 로직 추가 구현 필요
+        return jsonify({"message": "success"}), 200
+    else:
+        # 같지 않다면 fail
+        return jsonify({"message": "fail"}), 203
