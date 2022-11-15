@@ -10,7 +10,6 @@ mypage = Blueprint("mypage", __name__, url_prefix="/mypage")
 # 마이 페이지 기본 정보 get
 @mypage.route('/')
 def mypage_home():
-
     user_id = "qwer"
     user = db.users.find_one({'user_id': user_id}, {'_id': False})
 
@@ -30,23 +29,25 @@ def mypage_data():
 # til 카운터 +1
 @mypage.route('/til/keeping', methods=['POST'])
 def mypage_til_save():
-    user_id = "mina"
+    user_id = "qwer"
 
     til_url = request.form['til_url']
     print(til_url)
     til_count = request.form['til_count']
     print(til_count)
     date = common_function.now_time('sametime')
-
-    db.users.update_one({'user_id': user_id}, {'$set': {'til_count': int(til_count) + 10}})
-    doc = {
-        'user_id': user_id,
-        'til_url': til_url,
-        'til_date': date
-    }
-    db.til.insert_one(doc)
-
-    return jsonify({"message": "축하드려요 🎉 + 10 점을 획득하셨습니다! "}), 200
+    today_til = db.til.find_one({'user_id': user_id, 'til_date': date})
+    if today_til is None:
+        db.users.update_one({'user_id': user_id}, {'$set': {'til_count': int(til_count) + 10}})
+        doc = {
+            'user_id': user_id,
+            'til_url': til_url,
+            'til_date': date
+        }
+        db.til.insert_one(doc)
+        return jsonify({"message": "축하드려요 🎉 + 10 점을 획득하셨습니다! "}), 200
+    else:
+        return jsonify({"message": "하루에 한번만 가능합니다."}), 200
 
 
 # 게시글 수정
@@ -72,7 +73,6 @@ def post_update():
 # 게시글 삭제
 @mypage.route('/deletion', methods=['POST'])
 def post_delete():
-
     user_id = "qwer"
 
     question_id = int(request.form['question_id'])
