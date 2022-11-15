@@ -15,6 +15,15 @@ def mypage_home():
 
     return render_template('mypage.html', user_name=user['user_name'], til_count=user['til_count'])
 
+# 내가 작성했던 리스트 get
+@mypage.route('/data')
+def mypage_data():
+    user_id = "qwer"
+    question_list = list(db.testQuestions.find({'user_id': user_id}, {'_id': False}))
+    print(question_list)
+
+    return jsonify({'question_list': question_list})
+
 
 # til 카운터 +1
 @mypage.route('/til/keeping', methods=['POST'])

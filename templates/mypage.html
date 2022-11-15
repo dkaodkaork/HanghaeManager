@@ -36,6 +36,10 @@
             padding: 0
         }
 
+        body{
+            background-color: var(--color-3);
+        }
+
         .container {
             width: 80%;
             min-width: 600px;
@@ -68,7 +72,7 @@
         .graph-box {
             width: 60%;
 
-            background-color: #C2185B;
+            background-color: var(--color-2);
         }
 
 
@@ -86,40 +90,41 @@
 
         .my-til-score {
             width: 20%;
-             font-size: 30px;
+            font-size: 30px;
             font-weight: bold;
 
 
         }
 
-        .my-til-rank{
+        .my-til-rank {
             width: 20%;
             font-size: 30px;
             font-weight: bold;
 
         }
 
-        .my-til-score-background, .my-til-rank-background{
+        .my-til-score-background, .my-til-rank-background {
             position: relative;
         }
 
-        .my-til-score-background > img, .my-til-rank-background> img {
+        .my-til-score-background > img, .my-til-rank-background > img {
             margin-top: 7px;
 
         }
 
-        .my-til-score-background >p, .my-til-rank-background> p {
+        .my-til-score-background > p, .my-til-rank-background > p {
             position: absolute;
             top: 35%;
             left: 41%;
-             color: var(--color-4);
+            color: var(--color-5);
 
         }
 
         .submit-box {
             width: 100%;
             height: 10%;
-            margin-left: 30px;
+            margin-top: 10px;
+            margin-left: 20px;
         }
 
         .submit-box > div {
@@ -140,16 +145,21 @@
 
         }
 
+        .submit-box > div > button:hover {
+            border: 2px solid white;
+        }
 
         input {
 
             width: 500px;
             height: 40px;
-            font-size: 17px;
+            font-size: 16px;
+            color: var(--color-5);
             border: 0;
             border-radius: 15px;
             outline: none;
-            padding-left: 10px;
+            padding-left: 20px;
+
             background-color: var(--color-4);
 
         }
@@ -157,19 +167,153 @@
 
         .my-post {
             width: 100%;
-            height: 300px;
+            height: 36%;
             margin-top: 20px;
-            background-color: #C2185B;
+            background-color: var(--color-3);
 
+        }
+
+        .my-post-list {
+            margin-top: 20px;
+            width: 100%;
+            height: 90%;
+            overflow: scroll;
+        }
+
+        .one-post-line {
+            margin-top: 15px;
+            margin-left: 30px;
+
+            text-align: center;
+            width: 91%;
+            display: flex;
+        }
+
+        .one-post-info {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .one-post-info:hover {
+            border: 2px solid var(--color-4);
+        }
+
+        .one-post-line > button {
+            margin-left: 10px;
+            width: 70px;
+            padding: 10px;
+
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            background-color: var(--color-5);
+            border: 1px solid var(--color-5);
+
+        }
+
+        .post-num {
+            font-weight: bold;
+            margin-left: 20px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .post-title {
+            width: 78%;
+            display: inline-block;
+
+        }
+
+        .post-heart {
+            font-weight: bold;
+            display: inline-block;
+            width: 10%;
         }
 
 
         button:hover {
-            border: 3px solid white;
+            border: 2px solid white;
         }
 
 
     </style>
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/mypage/data",
+                data: {},
+                success: function (response) {
+                    console.log(response['question_list'])
+                    const question_list = response['question_list'];
+
+
+                    for (let i = 0; i < question_list.length; i++) {
+                        console.log(question_list[i]);
+                        let question_id = question_list[i]['question_id'];
+                        let main_ability = question_list[i]['main_ability'];
+                        let question_title = question_list[i]['question_title'];
+                        let q_heart_count = question_list[i]['q_heart_count'];
+
+                        let title = main_ability + ": " + question_title.substring(0, 20) + " ・・・・・"
+
+                        let temp_html = `<div class="one-post-line">
+                                            <div class="one-post-info" onclick="move_post(${question_id})">
+                                                <span class="post-num" style="display: inline-block">${i + 1}</span>
+                                                <span class="post-title">${title}</span>
+                                                <span class="post-heart"> 💛 ️${q_heart_count}</span>
+                                            </div>
+                                            <button>수정</button>
+                                            <button>삭제</button>
+                                         </div>`
+
+
+                        $('.my-post-list').append(temp_html)
+                    }
+
+
+                }
+            })
+
+        })
+
+        function move_post(question_id) {
+            alert('hi')
+        }
+
+        function url_submit() {
+            url = $('#url-text').val()
+            console.log(url)
+            url_check = url.substring(0, 4)
+
+            if (url.length > 15 && url_check === "http") {
+                $.ajax({
+                    type: "POST",
+                    url: "/mypage/til/keeping",
+                    data: {
+                        'til_url': url,
+                        'til_count': til_count,
+                    },
+                    success: function (response) {
+                        alert(response['message']);
+                        window.location.reload();
+
+                    }
+                })
+            } else {
+                let message = "정확한 링크를 등록해주세요!"
+                alert(message);
+            }
+
+        }
+
+
+    </script>
 </head>
 <body>
 <div class="container">
@@ -183,7 +327,7 @@
         </svg>
     </div>
 
-    <p style="font-size: 26px; margin-left: 30px; font-family: var(--font-point);"> 나의 TIL 현황</p>
+    <p style="font-size: 26px; margin-left: 30px; font-family: var(--font-point);"> {{user_name}}님의 TIL 현황</p>
     <div class="til-box">
         <div class="graph-box">
             <p style="font-size: 20px; margin-left: 30px; font-family: var(--font-point);">활동 그래프</p>
@@ -195,7 +339,7 @@
             <p class="title">나의 TIL 점수</p>
             <div class="my-til-score-background">
                 <img style="height: 9rem" src="/static/img/mypage_score.png">
-                <p style="font-size: 30px; font-weight: bold">30</p>
+                <p style="font-size: 30px; font-weight: bold;">{{til_count}}</p>
             </div>
         </div>
         <div class="my-til-rank">
@@ -209,16 +353,98 @@
 
     </div>
     <div class="submit-box">
-        <p class="title">오늘의 TIL 제출하기</p>
-        <div>
-            <input/>
-            <button>제출하기</button>
+        <p class="title" style="margin-left: 15px">오늘의 TIL 제출하기</p>
+        <div class="url-box">
+            <input id="url-text" type="text" placeholder="링크를 제출해주세요."/>
+            <button onclick="url_submit()">제출하기</button>
         </div>
     </div>
 
     <div class="my-post">
         <p class="title" style="margin-left: 30px;"> 나의 게시글 목록</p>
         <div class="my-post-list">
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+            <div class="one-post-line">
+                <div class="one-post-info">
+                    <span class="post-num" style="display: inline-block">1</span>
+                    <span class="post-title">제목이얀ㅇ린ㄹㄴ라니라니러ㅣㄴ머;리너 ㅣ넝리넝ㄹ </span>
+                    <span class="post-heart"> 💛️ ️30</span>
+                </div>
+                <button>수정</button>
+                <button>삭제</button>
+            </div>
+
 
         </div>
     </div>
