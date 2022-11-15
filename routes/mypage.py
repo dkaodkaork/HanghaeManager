@@ -22,7 +22,7 @@ def mypage_data():
     question_list = list(db.testQuestions.find({'user_id': user_id}, {'_id': False}))
     print(question_list)
 
-    return jsonify({'question_list': question_list})
+    return jsonify({'question_list': question_list}), 200
 
 
 # til 카운터 +1
@@ -44,6 +44,24 @@ def mypage_til_save():
     }
     db.til.insert_one(doc)
 
-    return jsonify({"message": "축하드려요 🎉 + 10 점을 획득하셨습니다! "})
+    return jsonify({"message": "축하드려요 🎉 + 10 점을 획득하셨습니다! "}), 200
 
 
+# 게시글 수정
+@mypage.route('/modification', methods=['POST'])
+def post_update():
+    user_id = "qwer"
+
+    question_id = request.form['question_id']
+    question_detail = request.form['question_detail']
+
+    # user_id와 question_id에 저장된 user_id가 맞는지 확인 하기 위한 find
+    post = db.question.find_one({'question_id': question_id}, {'_id': False})
+
+    # 같다면 update
+    if post['user_id'] == user_id:
+        db.question.update_one({'question_id': question_id}, {'$set': {'question_detail': question_detail}})
+        return jsonify({"message": "success"}), 200
+    else:
+        # 같지 않다면 fail
+        return jsonify({"message": "fail"}), 200
