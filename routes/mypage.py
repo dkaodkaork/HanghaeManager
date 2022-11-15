@@ -54,7 +54,7 @@ def mypage_til_save():
 def post_update():
     user_id = "qwer"
 
-    question_id = request.form['question_id']
+    question_id = int(request.form['question_id'])
     question_detail = request.form['question_detail']
 
     # user_id와 question_id에 저장된 user_id가 맞는지 확인 하기 위한 find
@@ -62,7 +62,7 @@ def post_update():
 
     # 같다면 update
     if post['user_id'] == user_id:
-        db.question.update_one({'question_id': int(question_id)}, {'$set': {'question_detail': question_detail}})
+        db.question.update_one({'question_id': question_id}, {'$set': {'question_detail': question_detail}})
         return jsonify({"message": "success"}), 200
     else:
         # 같지 않다면 fail
@@ -75,14 +75,14 @@ def post_delete():
 
     user_id = "qwer"
 
-    question_id = request.form['question_id']
+    question_id = int(request.form['question_id'])
 
     # user_id와 question_id에 저장된 user_id가 맞는지 확인 하기 위한 find
     post = db.question.find_one({'question_id': question_id}, {'_id': False})
     print(post)
     # 같다면 delete
     if post['user_id'] == user_id:
-        db.users.delete_one({'question_id': int(question_id)})
+        db.question.delete_one({'question_id': question_id})
         # question의 answer들도 삭제하는 로직 추가 구현 필요
         return jsonify({"message": "success"}), 200
     else:
