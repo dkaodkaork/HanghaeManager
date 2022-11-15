@@ -22,3 +22,10 @@ def main_rank_get():
     rank_list = sorted(count_list, key= lambda x : x['til_count'], reverse=True)
     print(rank_list[:5])
     return jsonify({'ranks':rank_list[:5]})
+
+@main.route("/questions", methods=["GET"])
+def main_questions_get():
+    quests_list = list(db.testQuestions.find({}, {'_id': False}))
+    # rank_list = sorted(count_list, key= lambda x : x['til_count'], reverse=True)
+    print(quests_list)
+    return jsonify({'quests':quests_list})
