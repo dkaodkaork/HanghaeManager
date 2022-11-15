@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-     <style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
 
         @font-face {
             font-family: 'Cafe24Ssurround';
@@ -21,17 +23,206 @@
 
         :root {
             --color-1: #FCE4EC;
-            --color-2: #C2185B;
+            --color-2: rgba(194, 24, 91, 0.55);
             --color-3: #E0F2F1;
-            --color-4: #00796B;
+            --color-4: rgba(0, 121, 107, 0.31);
+            --color-5: rgb(0, 121, 107);
             --font-point: Cafe24Ssurround;
             --font-basic: S-CoreDream-3Light;
+        }
+
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        .container {
+            width: 80%;
+            min-width: 600px;
+            max-width: 900px;
+
+            height: 100%;
+            background-color: #E0F2F1;
+
+            position: absolute;
+            left: 38%;
+            margin-left: -250px;
+
+        }
+
+        .title {
+            font-size: 20px;
+            font-family: var(--font-point)
+        }
+
+        .body-header {
+            height: 10rem;
+            background-color: var(--color-4);
+        }
+
+        .bi-house {
+            margin-top: 10%;
+            margin-left: 10%;
+        }
+
+        .graph-box {
+            width: 60%;
+
+            background-color: #C2185B;
+        }
+
+
+        .til-box {
+            text-align: center;
+            width: 100%;
+            height: 25%;
+
+            margin-top: 10px;
+
+
+            display: flex;
+            flex-direction: row;
+        }
+
+        .my-til-score {
+            width: 20%;
+             font-size: 30px;
+            font-weight: bold;
+
+
+        }
+
+        .my-til-rank{
+            width: 20%;
+            font-size: 30px;
+            font-weight: bold;
+
+        }
+
+        .my-til-score-background, .my-til-rank-background{
+            position: relative;
+        }
+
+        .my-til-score-background > img, .my-til-rank-background> img {
+            margin-top: 7px;
+
+        }
+
+        .my-til-score-background >p, .my-til-rank-background> p {
+            position: absolute;
+            top: 35%;
+            left: 41%;
+             color: var(--color-4);
+
+        }
+
+        .submit-box {
+            width: 100%;
+            height: 10%;
+            margin-left: 30px;
+        }
+
+        .submit-box > div {
+            margin: 1rem;
+        }
+
+        .submit-box > div > button {
+            font-size: 15px;
+            font-weight: bold;
+            padding: 12px;
+            margin-left: 10px;
+            width: 100px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: var(--color-5);
+            border: 1px solid var(--color-5);
+            color: white;
+
+        }
+
+
+        input {
+
+            width: 500px;
+            height: 40px;
+            font-size: 17px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: var(--color-4);
+
+        }
+
+
+        .my-post {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+            background-color: #C2185B;
+
+        }
+
+
+        button:hover {
+            border: 3px solid white;
         }
 
 
     </style>
 </head>
 <body>
-myPage Test
+<div class="container">
+    <div class="body-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill=var(--color-5) class="bi-house"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+            <path fill-rule="evenodd"
+                  d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </svg>
+    </div>
+
+    <p style="font-size: 26px; margin-left: 30px; font-family: var(--font-point);"> 나의 TIL 현황</p>
+    <div class="til-box">
+        <div class="graph-box">
+            <p style="font-size: 20px; margin-left: 30px; font-family: var(--font-point);">활동 그래프</p>
+            <div class="til-graph">
+
+            </div>
+        </div>
+        <div class="my-til-score">
+            <p class="title">나의 TIL 점수</p>
+            <div class="my-til-score-background">
+                <img style="height: 9rem" src="/static/img/mypage_score.png">
+                <p style="font-size: 30px; font-weight: bold">30</p>
+            </div>
+        </div>
+        <div class="my-til-rank">
+            <p class="title">나의 TIL 랭킹</p>
+            <div class="my-til-rank-background">
+                <img style="height: 9rem" src="/static/img/mypage_rank.png">
+                <p> 20</p>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="submit-box">
+        <p class="title">오늘의 TIL 제출하기</p>
+        <div>
+            <input/>
+            <button>제출하기</button>
+        </div>
+    </div>
+
+    <div class="my-post">
+        <p class="title" style="margin-left: 30px;"> 나의 게시글 목록</p>
+        <div class="my-post-list">
+
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
