@@ -17,25 +17,25 @@ import hashlib
 def join_home():
     return render_template('join.html')
 
-# @join.route('/check', methods=['POST'])
-# def id_overlap_check(request):
-#     id_receive = request.form['id_give']
-#     try:
-#         # 중복 검사 실패
-#         user = db.users.find_one(id_receive)
-#     except:
-#         # 중복 검사 성공
-#         user = None
-#     if user is None:
-#         overlap = "pass"
-#     else:
-#         overlap = "fail"
-#     return jsonify({'result': 'fail'})
+@join.route('/check', methods=['POST'])
+def id_overlap_check(request):
+    id_receive = request.form['id_give']
+    try:
+        # 중복 검사 실패
+        user = db.users.find_one(id_receive)
+    except:
+        # 중복 검사 성공
+        user = None
+    if user is None:
+        overlap = "pass"
+    else:
+        overlap = "fail"
+    return jsonify({'result': 'fail'})
 
 
-# [회원가입 API]
-# id, pw, nickname을 받아서, mongoDB에 저장합니다.
-# 저장하기 전에, pw를 sha256 방법(=단방향 암호화. 풀어볼 수 없음)으로 암호화해서 저장합니다.
+
+
+
 @join.route('/join', methods=['POST'])
 def api_join():
     id_receive = request.form['id_give']

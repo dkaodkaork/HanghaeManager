@@ -113,44 +113,44 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
-        {#function id_overlap_check() {#}
-        {#    $('.user_id_input').change(function () {#}
-        {#        $('#id_check_success').hide();#}
-        {#        $('.id_overlap_button').show();#}
-        {#        $('.user_id_input').attr("check_result", "fail");#}
-        {#    })#}
-        {#    if ($('.user_id_input').val() == '') {#}
-        {#        alert('아이디를 입력해주세요.')#}
-        {#        return; //공백인 경우#}
-        {#    }#}
-        {##}
-        {##}
-        {#     let id_overlap_input = document.querySelector('input[name="user_id"]');#}
-        {##}
-        {#    $.ajax({#}
-        {#        url: "/join/check",#}
-        {#        data: {#}
-        {#            'user_id': id_overlap_input.value#}
-        {#        },#}
-        {#        datatype: 'json',#}
-        {#        success: function (data) {#}
-        {#            console.log(data['overlap']);#}
-        {#            if (data['overlap'] == "fail") {#}
-        {#                alert("이미 존재하는 아이디 입니다.");#}
-        {#                id_overlap_input.focus();#}
-        {#                return;#}
-        {#            } else {#}
-        {#                alert("사용가능한 아이디 입니다.");#}
-        {#                $('.user_id_input').attr("check_result", "success");#}
-        {#                $('#id_check_success').show();#}
-        {#                $('.id_overlap_button').hide();#}
-        {#                return;#}
-        {#            }#}
-        {#        }#}
-        {#    });#}
-        {##}
-        {#}#}
-        {##}
+        function id_overlap_check() {
+            $('.user_id_input').change(function () {
+                $('#id_check_success').hide();
+                $('.id_overlap_button').show();
+                $('.user_id_input').attr("check_result", "fail");
+            })
+            if ($('.user_id_input').val() == '') {
+                alert('아이디를 입력해주세요.')
+                return; //공백인 경우
+            }
+
+
+             let id_overlap_input = document.querySelector('input[name="user_id"]');
+
+            $.ajax({
+                url: "/join/check",
+                data: {
+                    'user_id': id_overlap_input.value
+                },
+                datatype: 'json',
+                success: function (data) {
+                    console.log(data['overlap']);
+                    if (data['overlap'] == "fail") {
+                        alert("이미 존재하는 아이디 입니다.");
+                        id_overlap_input.focus();
+                        return;
+                    } else {
+                        alert("사용가능한 아이디 입니다.");
+                        $('.user_id_input').attr("check_result", "success");
+                        $('#id_check_success').show();
+                        $('.id_overlap_button').hide();
+                        return;
+                    }
+                }
+            });
+
+        }
+
 
             function join() {
              if ($('.user_id_input').val() == ''||$('.input').val() == '') {
