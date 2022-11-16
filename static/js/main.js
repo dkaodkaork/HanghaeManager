@@ -29,31 +29,42 @@ function show_rank() {
     });
 }
 
-function show_questions() {
+function show_questions(like = false, rvs = true) {
     $.ajax({
         type: 'GET',
         url: '/bulletin-board/questions',
         data: {},
         success: function (response) {
             let rows = response['quests']
-            for (let i = 0; i < rows.length; i++) {
+            if (like == true) {
+                rows.sort((a, b) => a.q_heart_count - b.q_heart_count);
+            } else {
+                rows.sort(function (a, b) {
+                    if (a.question_date > b.question_date) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                })
+            }
+            if(rvs == true) rows.reverse();
 
+            for (let i = 0; i < rows.length; i++) {
                 let user_name = rows[i]['user_name']
                 let question_id = rows[i]['question_id']
                 let question_title = rows[i]['question_title']
                 let question_date = rows[i]['question_date']
                 let question_category = rows[i]['main_ability']
                 let qestion_heart = rows[i]['q_heart_count']
+                console.log(question_date, qestion_heart)
 
-
-                console.log(user_name, question_id, question_title, question_date)
-                console.log(typeof question_date)
                 let temp_html = `
                     <tr id="quest-list" class="quest-list ${question_category}" >
                         <td class="ability">${question_category}</td>  
-                        <td class="title" >${question_title}</td>
+                        <td class="title quest-title" >${question_title}</td>
                         <td class="author">${user_name}</td>
                         <td class="heart">❤️ ${qestion_heart}</td>
+                        <td class="date">${question_date}</td>
                     </tr>`
                 $('#question_list').append(temp_html)
             }
@@ -77,7 +88,7 @@ jQuery(function ($) {
         btnGreen = $('#btn-node'),
         btnBlue = $('#btn-spring');
 
-        /* ボタンのいずれかをクリックした場合 */
+    /* ボタンのいずれかをクリックした場合 */
     btnList.click(function () {
         if (!($(this).hasClass('is_active'))) {
             let filterClass = $(this).attr('key');
@@ -106,7 +117,7 @@ jQuery(function ($) {
         btnGreen = $('#btn-node'),
         btnBlue = $('#btn-spring');
 
-        /* ボタンのいずれかをクリックした場合 */
+    /* ボタンのいずれかをクリックした場合 */
     btnList.click(function () {
         if (!($(this).hasClass('is_active'))) {
             let filterClass = $(this).attr('key');
@@ -129,32 +140,38 @@ jQuery(function ($) {
 const searchForm = document.querySelector('#search-form')
 const searchInput = document.querySelector('#search-form input');
 
-function onSearchSubmit(event){
+function onSearchSubmit(event) {
     event.preventDefault();
     const keywords = searchInput.value;
     console.log(keywords)
-    let titles = $('.title');
-    searchInput.value = ''
-    console.log(titles)
+    let list = $('.quest-list');
+    searchInput.value = '';
+    list.each(function () {
+        $(this).fadeOut(0);
+        if ($(this).text().indexOf(keywords) !== - 1) {
+            $(this).stop().fadeIn(300);
+            console.log($(this).text());
+        }
+    });
 }
 
 searchForm.addEventListener('submit', onSearchSubmit)
 
-// btnList.click(function () {
 
-//     if (!($(this).hasClass('is_active'))) {
-//         let filterClass = $(this).attr('key');
-//         btnList.removeClass('is_active');
-//         $(this).addClass('is_active');
+const latestBtn = document.querySelector("#order-latest");
+const likesBtn = document.querySelector("#order-likes");
 
+latestBtn.addEventListener('click', clickLatest)
+likesBtn.addEventListener('click', clickLikes)
 
-//         box.each(function () {
-//             $(this).fadeOut(0);
-//             if ($(this).hasClass(filterClass)) {
-//                 $(this).stop().fadeIn(300);
-//             } else if (filterClass === 'all') {
-//                 box.stop().fadeIn(300);
-//             }
-//         });
-//     }
-// });
+function clickLatest() {
+    console.log('latest');
+    $('#question_list').children().remove()
+    show_questions(false);
+}
+
+function clickLikes() {
+    console.log('likes');
+    $('#question_list').children().remove()
+    show_questions(true);
+}
