@@ -9,7 +9,11 @@ import datetime
 
 import hashlib
 
-SECRET_KEY = 'HANGHAE'
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 @login.route('/')
 def login_home():
@@ -54,7 +58,6 @@ def api_valid():
         userinfo = db.users.find_one({'user_id': payload['user_id']}, {'_id': 0})
         return jsonify({'result': 'success', 'user_name': userinfo['user_name']})
     except jwt.ExpiredSignatureError:
-        # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
