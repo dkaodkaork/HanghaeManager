@@ -42,7 +42,9 @@ def api_join():
         'user_id': id_receive,
         'user_pw': pw_hash,
         'user_name': name_receive,
-        'til_count': til_count
+        'til_count': til_count,
+        'q_heart_list': [],
+        'a_heart_list': []
     }
 
     db.users.insert_one(doc)
