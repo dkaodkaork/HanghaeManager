@@ -65,10 +65,21 @@
             background-color: var(--color-4);
         }
 
+        .body-header > span:hover{
+            font-weight: bolder;
+        }
+
+        .bi-house:hover{
+            width: 38px;
+            height: 38px;
+        }
+
+
         .bi-house {
-            margin-top: 8%;
+            margin-top: 60px;
             margin-left: 10%;
         }
+
 
         .middle-box {
             height: 40%;
@@ -81,6 +92,7 @@
             border-radius: 10px;
             background-color: var(--color-4);
             margin-left: 10px;
+            padding-top: 5px;
         }
 
 
@@ -88,21 +100,19 @@
             text-align: center;
             width: 100%;
             height: 65%;
-
-            margin-top: 10px;
-
-
+            margin-top: 15px;
             display: flex;
             flex-direction: row;
         }
 
         .til-graph {
-            margin-top: 10px;
+            margin: 20px;
         }
 
         .til-circle {
-            width: 35px;
+            width: 38px;
             margin: 5px;
+            float: left;
         }
 
         .my-til-score, .my-til-rank {
@@ -272,9 +282,10 @@
 
         }
 
-        button:hover {
+        button:hover{
             border: 2px solid white;
         }
+
 
     </style>
 
@@ -287,10 +298,10 @@
                 url: "/mypage/data",
                 data: {},
                 success: function (response) {
-                    console.log(response['question_list'])
+                    console.log(response)
                     const question_list = response['question_list'];
-
-
+                    const til_date_list = response['til_date_list']
+                    console.log(til_date_list)
                     for (let i = 0; i < question_list.length; i++) {
                         console.log(question_list[i]);
                         let question_id = question_list[i]['question_id'];
@@ -319,18 +330,29 @@
                     const month_last_day = new Date(now.getFullYear(), now.getMonth() + 1, 0);
                     const month_day_count = month_last_day.getDate();
 
-                    for (let j = 0; j < month_day_count; j++) {
-                        let temp_html = `<img class="til-circle" src='../static/img/circle1.png'>`
+                    const now_day = now.getDate();
+                    console.log(now_day)
+                    console.log(month_day_count)
 
-                        $('.til-graph').append(temp_html)
 
+                    let temp_html;
+                    for (let j = 1; j < month_day_count +1; j++) {
+                       if(til_date_list.includes(j)){
+                           temp_html = `<img class="til-circle" src='../static/img/green.png'>`
+                       }else if(j >= now_day){
+                           temp_html = `<img class="til-circle" src='../static/img/x_gray.png'>`
+                       }
+                       else{
+                           temp_html = `<img class="til-circle" src='../static/img/x_black.png'>`
+                       }
+
+                       $('.til-graph').append(temp_html)
                     }
-
 
                 }
             })
-
         })
+
 
         function move_post(question_id) {
             // 게시글로 이동
@@ -409,20 +431,21 @@
 <body>
 <div class="container">
     <div class="body-header">
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill=var(--color-5) class="bi-house"
+        <svg onclick="location.href='/bulletin-board'" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill=var(--color-5) class="bi-house"
              viewBox="0 0 16 16">
             <path fill-rule="evenodd"
                   d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
             <path fill-rule="evenodd"
                   d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
         </svg>
+        <span style="float: right; margin-top:70px; margin-right:10%; font-size: 20px">logout</span>
     </div>
     <div class="middle-box">
         <p style="font-size: 26px;font-family: var(--font-point); margin-left: 30px;"> {{ user_name }}님의 TIL 현황</p>
 
         <div class="til-box">
             <div class="graph-box">
-                <p class="title" style=" margin-left: 30px;">활동 그래프</p>
+                <p class="title">활동 그래프</p>
                 <div class="til-graph">
 
                 </div>
