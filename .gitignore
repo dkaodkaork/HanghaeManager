@@ -6,3 +6,4 @@ venv
 
 testDB.py
 
+__pycache__
