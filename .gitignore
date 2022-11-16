@@ -1,4 +1,8 @@
 venv
 
 .env
+
+.idea
+
 testDB.py
+
