@@ -1,37 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-     <style>
+    <!-- jQuaery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        @font-face {
-            font-family: 'Cafe24Ssurround';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+    <!-- local css and JS-->
+    <link rel="stylesheet" href="../static/main/main.css">
+    <link rel="stylesheet" href="../static/main/bord.css">
+    <script src="../static/main/main.js"></script>
 
-        @font-face {
-            font-family: 'S-CoreDream-5Light';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+    <title>Main</title>
 
-        :root {
-            --color-1: #FCE4EC;
-            --color-2: #C2185B;
-            --color-3: #E0F2F1;
-            --color-4: #00796B;
-            --font-point: Cafe24Ssurround;
-            --font-basic: S-CoreDream-3Light;
-        }
-
-
-    </style>
 </head>
+
 <body>
-mainPage Test
+    <h2>
+        mainPage Test
+    </h2>
+    <div class="container">
+        <div class="item1">
+            <div class="item_rank">
+                <div class="rank-title">TIL 랭킹</div>
+                <table id="ranking_list" class="rank-table">
+                </table>
+            </div>
+        </div>
+        <div class="item2">
+            <div class="quest-bord">
+                this is Bord
+                <div class="quest-head">
+                    <div class="btn-box quest-item">
+                        <button id="btn-all" class="category-btn all" key="all"></button>
+                        <button id="btn-react" class="category-btn react" key="React"></button>
+                        <button id="btn-node" class="category-btn node" key="Node"></button>
+                        <button id="btn-spring" class="category-btn spring" key="Spring"></button>
+                    </div>
+                    <div class="search-box">
+                        <form id="search-form">
+                            <img src="/static/img/search.png" class="btn-search">
+                            <input class="input-box" type="text" name="search" placeholder="검색">
+                        </form>
+                    </div>
+                    <div>
+                        <button>질문 작성하기</button>
+                        <button>최신순</button>
+                        <button>좋아요순</button>
+                    </div>
+                    
+                </div>
+                <table class="quest-table" >
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ability">기술 스택</th>
+                            <th scope="col" class="title">제목</th>
+                            <th scope="col" class="author">작성자</th>
+                            <th scope="col" class="heart">좋아요</th>
+                            <!-- <th scope="col">날짜</th> -->
+                        </tr>
+                    </thead>
+                </table>
+                <div style="width: 100%; height: 450px; overflow-y: scroll;">
+                    <table class="quest-table" >
+                            <tbody id="question_list" class="question-list">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
