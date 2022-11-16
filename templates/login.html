@@ -39,8 +39,55 @@
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
             font-weight: normal;
             font-style: normal;
-            color: #00796B;
+            color: #00796B;}
+        .button {
+            background-color: var(--color-4);
+            color: var(--color-3);
+            margin-top: 20px;
+            border-radius: 10px;
+            padding: 10px 20px;
+             font-family: 'S-CoreDream-5Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
         }
+        .loginbutton {
+             background-color: var(--color-4);
+            color: var(--color-3);
+            margin-top: 20px;
+            border-radius: 10px;
+            padding: 10px 20px;
+             font-family: 'S-CoreDream-5Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+        .section{
+            background-color: var(--color-3);
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto 0px auto;
+            box-shadow: 0px 0px 3px 0px white;
+            padding: 15px 25px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            border-radius: 10px;
+            align-items: center;
+            font-family: 'S-CoreDream-5Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+        body{
+            background-color: var(--color-4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;}
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -50,7 +97,7 @@
         {% endif %}
 
         function login() {
-            console.log(1);
+
 
             $.ajax({
                 type: "POST",
