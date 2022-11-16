@@ -64,6 +64,7 @@ function show_questions(like = false, rvs = true) {
                         <td class="title quest-title" >${question_title}</td>
                         <td class="author">${user_name}</td>
                         <td class="heart">❤️ ${qestion_heart}</td>
+                        <td class="date">${question_date}</td>
                     </tr>`
                 $('#question_list').append(temp_html)
             }
