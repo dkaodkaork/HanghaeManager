@@ -1,6 +1,7 @@
 $(document).ready(function () {
     show_rank();
     show_questions();
+    user_test()
 });
 
 function show_rank() {
@@ -174,4 +175,17 @@ function clickLikes() {
     console.log('likes');
     $('#question_list').children().remove()
     show_questions(true);
+}
+
+
+// return jsonify({'result': 'success', 'user_name': userinfo['user_name']})
+function user_test() {
+    $.ajax({
+        type: 'GET',
+        url: '/bulletin-board/name',
+        data: {},
+        success: function (response) {
+            console.log(response)
+        }
+    });
 }
