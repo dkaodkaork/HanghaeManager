@@ -2,36 +2,157 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-     <style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-        @font-face {
-            font-family: 'Cafe24Ssurround';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      
+
+      <title>HangHaeManager</title>
+      <style>
+          @font-face {
+          font-family: "Cafe24Ssurround";
+          src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
+            format("woff");
+          font-weight: normal;
+          font-style: normal;
         }
-
+  
         @font-face {
-            font-family: 'S-CoreDream-5Light';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
+          font-family: "S-CoreDream-5Light";
+          src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+            format("woff");
+          font-weight: normal;
+          font-style: normal;
         }
-
+  
         :root {
-            --color-1: #FCE4EC;
-            --color-2: #C2185B;
-            --color-3: #E0F2F1;
-            --color-4: #00796B;
-            --font-point: Cafe24Ssurround;
-            --font-basic: S-CoreDream-3Light;
+          --color-1: #fce4ec;
+          --color-2: #c2185b;
+          --color-3: #e0f2f1;
+          --color-4: #00796b;
+          --font-point: Cafe24Ssurround;
+          --font-basic: S-CoreDream-3Light;
         }
-
-
-    </style>
-</head>
-<body>
-questionPage Test
-</body>
-</html>
+          .box {
+              display: flex;
+              flex-direction: column;
+              width: 100%;
+              max-width: 1000px;
+              margin: 50px auto auto auto;
+              background-color: #fce4ec;
+              height: 100%;
+  
+          }
+          .table {
+  
+              width: 600px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              margin: auto;
+  
+  
+          }
+          .mytitle {
+              width: 500px;
+              height: 70px;
+              margin-top: 30px;
+              margin-bottom: 30px;
+  
+              background-color:#e0f2f1;
+              border-radius: 10px;
+  
+              text-align: center;
+  
+              color: black;
+  
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+            }
+        th, td {
+          text-align: center;
+        }
+  
+      </style>
+      <script>
+          function save_question() {
+              let title = $('#title').val()
+              let main = $('#main').val()
+              let detail = $('#detail ').val()
+              let main_value = $('#main option:selected').attr('value')
+  
+              if (!(title && main && main_value)) {
+                  alert("내용이 작성되지 않은 곳이 있습니다. 확인해주세요!")
+              } else {
+                  confirm("게시글을 올리겠습니까?")
+              }
+          }
+  
+              $.ajax({
+                  type: 'POST',
+                  url: '/question',
+                  data: { question_title_give:title, question_detail_give:detail, main_ability_give:main},
+                  success: function (response) {
+                      alert(response['msg'])
+                      window.location.reload()
+                  }
+              });
+  
+      </script>
+  
+  </head>
+  <body>
+  <div class="box">
+      <div class="table">
+      <p class="mytitle">Q & A 질문 작성하기</p>
+          <table border="1" width = 800>
+          <tr>
+              <td colspan="2" height = 30> Q & A 질문글 작성하기 </td>
+          </tr>
+          <tr>
+              <td height = 30>
+                  <input id ="title" style="width:100%" type="text" placeholder="제목을 입력하세요." maxlength=20 >
+              </td>
+              <td width = 200>
+                      <select id="main">
+                        <option selected>주특기를 선택해주세요</option>
+                        <option value="1">Spring</option>
+                        <option value="2">Node.js</option>
+                        <option value="3">React</option>
+                        <option value="3">기타</option>
+                      </select>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" height=500 align = center>
+                  <textarea id ="detail" placeholder="내용을 입력하세요." style="width: 100%; height: 99%"></textarea>
+              </td>
+          </tr>
+          <tr>
+              <td style="padding-right:10px" colspan="2" >
+                  <input type="submit" value="작성하기" onclick="save_question()"/>
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2" align=center>
+                  <input style="width:100%" type="text" placeholder="해시 태그 작성 해주세요." maxlength=20 >
+              </td>
+          </tr>
+  
+      </table>
+      </div>
+  </div>
+  
+  
+  
+  </body>
+  </html>

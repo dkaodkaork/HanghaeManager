@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+    <title>Title</title>
+
+    <style>
+      @font-face {
+        font-family: "Cafe24Ssurround";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "S-CoreDream-5Light";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      :root {
+        --color-1: #fce4ec;
+        --color-2: #c2185b;
+        --color-3: #e0f2f1;
+        --color-4: #00796b;
+        --font-point: Cafe24Ssurround;
+        --font-basic: S-CoreDream-3Light;
+      }
+
+      .mytit {
+        width: 500px;
+        height: 70px;
+        margin: auto;
+        margin-top: 50px;
+
+        background-color:  #fce4ec;
+        border-radius: 10px;
+
+        text-align: center;
+
+        color: black;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .table {
+        width: 900px;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 10px;
+      }
+      .contents {
+        width: 900px;
+        margin: auto;
+        height: 600px;
+      }
+      .thumbs {
+        width: 900px;
+        margin: auto;
+        height: 50px;
+      }
+      .comment{
+        width: 900px;
+        margin: auto;
+        
+      }
+      .answer {
+        background-color:  #fce4ec;
+        width: 700px;
+        margin: auto 20px auto 10px;
+
+      }
+    
+    </style>
+    <script>
+
+    </script>
+
+
+  </head>
+  <body>
+    <div class="mytit">Q & A 게시글 제목</div>
+    <table class="table" border="1">
+      <thead>
+        <th scope="col" width="120">닉네임:</th>
+        <th scope="col" width="120">추천:</th>
+        <th scope="col" width="120">댓글:</th>
+        <th scope="col" width="600"></th>
+        <th width="250"></th>
+        <th scope="col" width="150">기술스택</th>
+      </thead>
+      <tr class="contents">
+        <td>내용</td>
+      </tr>
+      <table class="thumbs" border="1">
+        <td align="center">👍 추천</td>
+      </table>
+    </table>
+    <p></p>
+    <div class="comment">
+        <div class="input-group mb-3">
+        <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">등록</button>
+      </div>
+    </div>
+    <table class="table">
+          <tr>
+            <td align="center" width ="60">닉네임</td>
+            <td>
+                <p class="answer">.</p>
+            </td>
+            <td>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">추천</button>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" width ="60">닉네임</td>
+            <td>
+                <p class="answer">.</p>
+            </td>
+            <td>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">추천</button>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" width ="60">닉네임</td>
+            <td>
+                <p class="answer">,</p>
+            </td>
+            <td>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">추천</button>
+            </td>
+          </tr>
+      </table>
+    
+  </body>
+</html>
