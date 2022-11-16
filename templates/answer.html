@@ -90,6 +90,22 @@
     
     </style>
     <script>
+        const question_id = 8
+
+        function answer_save(){
+
+            const answer_detail = $('.form-control').val();
+            console.log(answer_detail)
+            $.ajax({
+                type: "POST",
+                url: "/post/answer",
+                data: {'question_id': question_id, 'answer_detail': answer_detail},
+                success: function (response) {
+                    alert(response['message'])
+                    window.location.reload();
+                }
+            })
+        }
 
     </script>
 
@@ -117,7 +133,7 @@
     <div class="comment">
         <div class="input-group mb-3">
         <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">등록</button>
+        <button onclick="answer_save()" class="btn btn-outline-secondary" type="button" id="button-addon2">등록</button>
       </div>
     </div>
     <table class="table">
