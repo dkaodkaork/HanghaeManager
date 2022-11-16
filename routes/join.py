@@ -20,7 +20,7 @@ def join_home():
 def id_overlap_check():
     user_id = request.args.get('user_id')
     result = db.users.find_one({'user_id': user_id})
-    print(result)
+
     if result == None:
         doc = {"message": "사용 가능한 아이디 입니다.", "success": True}
         return jsonify(doc)
