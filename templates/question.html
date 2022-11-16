@@ -92,7 +92,7 @@
               let main_value = $('#main option:selected').attr('value')
               
               if (!(title && main && main_value)) {
-                  alert("내용이 작성되지 않은 곳이 있습니다. 확인해주세요!")
+                return alert("내용이 작성되지 않은 곳이 있습니다. 확인해주세요!")
               } else if (confirm("게시글을 올리겠습니까?") == true){
                 alert("저장 완료!")
               } else {
