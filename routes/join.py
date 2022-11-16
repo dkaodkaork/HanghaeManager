@@ -1,4 +1,3 @@
-
 from flask import Blueprint, render_template, request, jsonify
 
 join = Blueprint("join", __name__, url_prefix="/join")
@@ -12,28 +11,22 @@ import datetime
 import hashlib
 
 
-
 @join.route('/')
 def join_home():
     return render_template('join.html')
 
-@join.route('/check', methods=['POST'])
-def id_overlap_check(request):
-    id_receive = request.form['id_give']
-    try:
-        # 중복 검사 실패
-        user = db.users.find_one(id_receive)
-    except:
-        # 중복 검사 성공
-        user = None
-    if user is None:
-        overlap = "pass"
+
+@join.route('/check', methods=['GET'])
+def id_overlap_check():
+    user_id = request.args.get('user_id')
+    result = db.users.find_one({'user_id': user_id})
+    print(result)
+    if result == None:
+        doc = {"message": "사용 가능한 아이디 입니다.", "success": True}
+        return jsonify(doc)
     else:
-        overlap = "fail"
-    return jsonify({'result': 'fail'})
-
-
-
+        doc = {"message": "이미 사용중인 아이디 입니다.", "success": False}
+        return jsonify(doc)
 
 
 @join.route('/join', methods=['POST'])
@@ -52,6 +45,5 @@ def api_join():
         'til_count': til_count
     }
 
-
-    db.user.insert_one(doc)
+    db.users.insert_one(doc)
     return jsonify({'result': 'success'})
