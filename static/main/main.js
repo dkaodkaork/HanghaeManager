@@ -51,7 +51,7 @@ function show_questions() {
                 let temp_html = `
                     <tr id="quest-list" class="quest-list ${question_category}" >
                         <td class="ability">${question_category}</td>  
-                        <td class="title" >${question_title}</td>
+                        <td class="title quest-title" >${question_title}</td>
                         <td class="author">${user_name}</td>
                         <td class="heart">❤️ ${qestion_heart}</td>
                     </tr>`
@@ -77,7 +77,7 @@ jQuery(function ($) {
         btnGreen = $('#btn-node'),
         btnBlue = $('#btn-spring');
 
-        /* ボタンのいずれかをクリックした場合 */
+    /* ボタンのいずれかをクリックした場合 */
     btnList.click(function () {
         if (!($(this).hasClass('is_active'))) {
             let filterClass = $(this).attr('key');
@@ -106,7 +106,7 @@ jQuery(function ($) {
         btnGreen = $('#btn-node'),
         btnBlue = $('#btn-spring');
 
-        /* ボタンのいずれかをクリックした場合 */
+    /* ボタンのいずれかをクリックした場合 */
     btnList.click(function () {
         if (!($(this).hasClass('is_active'))) {
             let filterClass = $(this).attr('key');
@@ -129,13 +129,19 @@ jQuery(function ($) {
 const searchForm = document.querySelector('#search-form')
 const searchInput = document.querySelector('#search-form input');
 
-function onSearchSubmit(event){
+function onSearchSubmit(event) {
     event.preventDefault();
     const keywords = searchInput.value;
     console.log(keywords)
-    let titles = $('.title');
-    searchInput.value = ''
-    console.log(titles)
+    let list = $('.quest-list');
+    searchInput.value = '';
+    list.each(function () {
+        $(this).fadeOut(0);
+        if ($(this).text().indexOf(keywords) !== - 1) {
+            $(this).stop().fadeIn(300);
+            console.log($(this).text());
+        }
+    });
 }
 
 searchForm.addEventListener('submit', onSearchSubmit)
