@@ -69,8 +69,14 @@
             font-weight: bolder;
         }
 
+        .bi-house:hover{
+            width: 38px;
+            height: 38px;
+        }
+
+
         .bi-house {
-            margin-top: 8%;
+            margin-top: 60px;
             margin-left: 10%;
         }
 
@@ -86,7 +92,7 @@
             border-radius: 10px;
             background-color: var(--color-4);
             margin-left: 10px;
-            padding: 10px;
+            padding-top: 5px;
         }
 
 
@@ -324,6 +330,8 @@
                     const month_last_day = new Date(now.getFullYear(), now.getMonth() + 1, 0);
                     const month_day_count = month_last_day.getDate();
 
+                    const now_day = now.getDate();
+                    console.log(now_day)
                     console.log(month_day_count)
 
 
@@ -331,8 +339,11 @@
                     for (let j = 1; j < month_day_count +1; j++) {
                        if(til_date_list.includes(j)){
                            temp_html = `<img class="til-circle" src='../static/img/green.png'>`
-                       }else{
-                           temp_html = `<img class="til-circle" src='../static/img/circle1.png'>`
+                       }else if(j >= now_day){
+                           temp_html = `<img class="til-circle" src='../static/img/x_gray.png'>`
+                       }
+                       else{
+                           temp_html = `<img class="til-circle" src='../static/img/x_black.png'>`
                        }
 
                        $('.til-graph').append(temp_html)
@@ -427,7 +438,7 @@
             <path fill-rule="evenodd"
                   d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
         </svg>
-        <span style="margin-left: 70%; font-size: 20px">logout</span>
+        <span style="float: right; margin-top:70px; margin-right:10%; font-size: 20px">logout</span>
     </div>
     <div class="middle-box">
         <p style="font-size: 26px;font-family: var(--font-point); margin-left: 30px;"> {{ user_name }}님의 TIL 현황</p>
