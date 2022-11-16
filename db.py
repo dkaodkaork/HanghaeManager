@@ -7,7 +7,7 @@ load_dotenv()
 DB = os.getenv('DB')
 client = MongoClient(DB, tlsCAFile=certifi.where())
 
-db = client.testhong
+db = client.manager
 
 
 

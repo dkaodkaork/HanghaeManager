@@ -1,0 +1,161 @@
+:root {
+    --color-1: #FCE4EC;
+    --color-2: #C2185B;
+    --color-3: #E0F2F1;
+    --color-4: #00796B;
+    --font-point: Cafe24Ssurround;
+    --font-basic: S-CoreDream-3Light;
+}
+
+.container {
+    display: flex;
+    background-color: aqua;
+    align-content: stretch;
+    height: 650px;
+}
+
+.rank-title {
+    height: 50px;
+    font-size: 25px;
+    padding-top: 25px;
+}
+
+.item1 {
+    text-align: center;
+    background-color: var(--color-1);
+    flex-grow: 1;
+}
+
+.item2 {
+    background-color: var(--color-3);
+    flex-grow: 2;
+}
+
+.item_rank {
+    background-color: white;
+    border-radius: 10%;
+    margin: 20px;
+}
+
+.rank-table th,
+.rank-table td {
+    text-align: center;
+    width: 25%;
+    height: 60px;
+}
+
+.rank_num {
+    color: white;
+}
+
+.circle {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-2);
+    text-align: center;
+    line-height: 80px;
+}
+
+#ranking_list {
+    margin: auto;
+}
+
+.rank-table {
+    border-spacing: 20px;
+    font-size: 18px;
+    width: 400px;
+}
+
+.btn-box {
+    background-color: white;
+    height: 60px;
+    margin: 5px;
+}
+
+.category-btn {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    outline: none;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-color: white;
+}
+
+#btn-react {
+    background-image: url(../img/React-icon.png);
+}
+
+#btn-node {
+    background-image: url(../img/Node_icon.png);
+}
+
+#btn-spring {
+    background-image: url(../img/Spring_icon.png);
+}
+
+.quest-bord {
+    padding: 20px;
+    width: 800px;
+}
+
+.quest-table {
+    border-collapse: collapse;
+    width: 800px;
+}
+
+.quest-list {
+    background-color: white;
+    border-radius: 10%;
+}
+
+.quest-table th,
+.quest-table td {
+    text-align: center;
+    height: 60px;
+    padding: 5px;
+}
+
+.title {
+    width: 200px;
+}
+
+.btn-search {
+    height: 10px;
+    ;
+}
+
+.search-box {
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.input-box {
+    background: none;
+}
+
+
+.quest-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.quest-item{
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.ability{
+    width: 100px;
+}
+
+.author{
+   width: 150px; 
+}
+.heart{
+    width: 75px;
+}
