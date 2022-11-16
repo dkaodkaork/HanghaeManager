@@ -35,7 +35,8 @@ def answer_insert():
             'user_name': user_name,
             'answer_date': answer_date,
             'answer_id': answer_id,
-            'answer_detail': answer_detail
+            'answer_detail': answer_detail,
+            'a_heart_count': 0
         }
 
         # question_id일 때의 answer_list 필드에  답변 추가
