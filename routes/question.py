@@ -10,12 +10,6 @@ import routes.common_function as common_function
 
 question = Blueprint("question", __name__, url_prefix="/question")
 
-# load_dotenv()
-# DB = os.getenv('DB')
-# client = MongoClient(DB, tlsCAFile=certifi.where())
-#
-# db = client.testQuestions
-
 @question.route('/')
 def question_home():
     return render_template('question.html')
@@ -26,18 +20,16 @@ def question_post():
     user_check = jwt_check.user_check()
 
     if user_check['result'] != "fail":
-        user_id = user_check['user_id']
 
+        user_id = user_check['user_id']
         user = db.users.find_one({'user_id': user_id}, {'_id': False})
         user_name = user['user_name']
 
         question_title_receive = request.form['question_title_give']
         question_detail_receive = request.form['question_detail_give']
         main_ability_receive = request.form['main_ability_give']
-
         question_list = list(db.question.find({},{'_id': False}))
         count = len(question_list) +1
-        print(count)
         question_date = common_function.now_time('othertime')
 
 
