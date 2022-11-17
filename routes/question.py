@@ -44,12 +44,14 @@ def question_post():
         doc = {
             'user_id': user_id,
             'user_name': user_name,
-            'question_title': question_title_receive,
+            'question_id': count,
+            'answer_list': [],
+            'q_heart_count': 0,
+            'question_date': question_date,
             'question_detail': question_detail_receive,
             'main_ability': main_ability_receive,
-            'question_id': count,
-            'question_date': question_date,
-            'answer_list': []
+            'question_title': question_title_receive,
+
         }
 
         db.question.insert_one(doc)
