@@ -13,7 +13,7 @@ def post_home():
 # 답변 저장 APi
 @post.route('/answer', methods=['POST'])
 def answer_insert():
-    try:
+    # try:
 
         user_check = jwt_check.user_check()
 
@@ -33,9 +33,12 @@ def answer_insert():
             question = db.question.find_one({'question_id': question_id}, {'answer_list': {'$slice': -1}})
             print(question)
             # 가장 최신의 answer_id를 가져옴
-            answer_id = question['answer_list'][0]['answer_id']
-            answer_id = answer_id + 1
 
+            if len(question['answer_list']) != 0:
+                answer_id = question['answer_list'][0]['answer_id']
+                answer_id = answer_id + 1
+            else: answer_id = 1
+        
             doc = {
                 'user_id': user_id,
                 'user_name': user_name,
@@ -49,8 +52,9 @@ def answer_insert():
             db.question.update_one({'question_id': question_id}, {'$push': {'answer_list': doc}})
 
             return jsonify({"message": "댓글 등록 완료!"})
+           
 
         else:
             return render_template('login.html')
 
-    except: return jsonify({"message": "다시 시도해주세요."})
+    # except: return jsonify({"message": "다시 시도해주세요."})
