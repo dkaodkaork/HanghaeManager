@@ -70,6 +70,11 @@
 
         }
 
+        .loginbutton:hover, .loginbutton:focus {
+            background-color: #00796B;
+            color: white;
+        }
+
         .button {
             background-color: var(--color-4);
             color: var(--color-3);
@@ -80,7 +85,28 @@
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
             font-weight: normal;
             font-style: normal;
+            margin-bottom: 30px;
+        }
 
+        .button:hover, .button:focus{
+            background-color: white;
+            color: #354f52;
+            border-color: #00796B;
+        }
+
+        .label{
+            display: inline-block;
+            float: left;
+            clear: left;
+            text-align: right;
+            width: 80px;
+            margin-right: 10px;
+
+        }
+
+        .field-body{
+            display: inline-block;
+            float: left;
         }
 
         .id_overlap_button {
@@ -89,7 +115,14 @@
             border-radius: 10px;
             border-color: white;
             padding: 10px 10px;
+            margin: 10px;
 
+        }
+
+        .id_overlap_button:hover, .id_overlap_button:focus {
+            background-color: white;
+            color: #354f52;
+            border-color: #00796B;
         }
 
         .section {
@@ -198,7 +231,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <label for="user_name">USERNAME </label>
+                        <label for="user_name" class="label">USERNAME </label>
                         <input type="text" class="name_input" id="user_name" placeholder="닉네임" required="required"/>
                     </div>
                 </div>
@@ -208,7 +241,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <label for="user_pw">PW </label>
+                        <label for="user_pw" class="label">PW </label>
                         <input type="password" class="pw_input" id="user_pw" placeholder="비밀번호" required="required"/>
                     </div>
                 </div>
