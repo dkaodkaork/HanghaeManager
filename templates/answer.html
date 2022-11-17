@@ -1,158 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
-    
-    <title>Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <style>
-      @font-face {
-        font-family: "Cafe24Ssurround";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
-          format("woff");
-        font-weight: normal;
-        font-style: normal;
-      }
 
-      @font-face {
-        font-family: "S-CoreDream-5Light";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
-          format("woff");
-        font-weight: normal;
-        font-style: normal;
-      }
+  <title>Title</title>
 
-      :root {
-        --color-1: #fce4ec;
-        --color-2: #c2185b;
-        --color-3: #e0f2f1;
-        --color-4: #00796b;
-        --font-point: Cafe24Ssurround;
-        --font-basic: S-CoreDream-3Light;
-      }
-
-      .mytit {
-        linear-gradient(45deg, #553c9a, #ee4b2b);
-        width: 500px;
-        height: 70px;
-        margin: 60px auto;
-        
-        background-color:  #fce4ec;
-        border-radius: 10px;
-      
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-     
-        .comment-box {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }   
-
-      .table {
-        width: 500px;
-        margin: auto;
-        margin-bottom: 10px;
-      }
-      .contents {
-        height: 300px;
-      }
-    
-      .thumbs {
-        text-align: center;
-        
-        
-      }
-      .btn-like {
-        display: inline-block;
-        border-radius: 20px;
-        color: transparent;
-        text-shadow: 0 0 2px rgba(255,255,255,.7), 0 0 0 #000;
-        
-      }  
-      .btn-like:hover {
-        text-shadow: 0 0 0 #ea0;
-        
-      }
-    
-      .mybox {
-        width: 95%;
-        max-width: 500px;
-        padding: 20px;
-        box-shadow: 0px 0px 10px 0px lightblue;
-        margin: 20px auto;
-      }
-
-      .mycomment {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;    
-      }
-
-      .mycomment > input {
-        width: 80%;
-      }
-      
-      .mycards {
-        width: 95%;
-        max-width: 500px;
-        margin: auto;
+  <style>
+    @font-face {
+      font-family: "Cafe24Ssurround";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
     }
 
-    .mycards > .card {
-        margin-top: 10px;
-        margin-bottom: 10px;
+    @font-face {
+      font-family: "S-CoreDream-5Light";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
     }
+
+    :root {
+      --color-1: #fce4ec;
+      --color-2: #c2185b;
+      --color-3: #e0f2f1;
+      --color-4: #00796b;
+      --font-point: Cafe24Ssurround;
+      --font-basic: S-CoreDream-3Light;
+    }
+
+    .mytit {
+      linear-gradient(45deg, #553c9a, #ee4b2b);
+      width: 500px;
+      height: 70px;
+      margin: 60px auto;
+
+      background-color: #fce4ec;
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comment-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .table {
+      width: 500px;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+
+    .contents {
+      height: 300px;
+    }
+
+    .thumbs {
+      text-align: center;
+
+
+    }
+
+    .btn-like {
+      display: inline-block;
+      border-radius: 20px;
+      color: transparent;
+      text-shadow: 0 0 2px rgba(255, 255, 255, .7), 0 0 0 #000;
+
+    }
+
+    .btn-like:hover {
+      text-shadow: 0 0 0 #ea0;
+
+    }
+
+    .mybox {
+      width: 95%;
+      max-width: 500px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px 0px lightblue;
+      margin: 20px auto;
+    }
+
+    .mycomment {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mycomment>input {
+      width: 80%;
+    }
+
+    .mycards {
+      width: 95%;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .mycards>.card {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
     textarea {
-      width : 500px;
-      height : 400px;
+      width: 500px;
+      height: 400px;
       border: 0px solid #fce4ec
     }
+  </style>
+  <script>
 
+    let question_id = `{{question_list.question_id}}`
 
-    
+    $(document).ready(function () {
+      show_answer();
+    });
+    function show_answer() {
 
-    
-    </style>
-    <script>
+      $.ajax({
+        type: "GET",
 
-        const question_id = `{{question_list.question_id}}`
+        url: `/answer?question_id=${question_id}`,
 
-          $(document).ready(function () {
-            show_answer();
-        });
-        function show_answer(){
-            
-          $.ajax({
-                type: "GET",
-                url: `/answer?question_id=${question_id}`,
-                data: {},
-                success: function (response) {
-                  console.log('12312')
-                  let rows = response['question_list']
-                  
-                  console.log('rows : ',rows)
+        data: {},
+        success: function (response) {
+          console.log('12312')
+          let rows = response['question_list']
 
-                  let answer1 = rows['answer_list']
+          console.log('rows : ', rows)
 
-                  for (let i = 0 ; i < answer1.length ; i++){
-                  let answer2 = answer1[i]['answer_detail']
-                  let username = answer1[i]['user_name']
-                  let temp_html =`<div class="card">
+          let answer1 = rows['answer_list']
+
+          for (let i = 0; i < answer1.length; i++) {
+            let answer2 = answer1[i]['answer_detail']
+            let username = answer1[i]['user_name']
+            let temp_html = `<div class="card">
                                   <div class="card-body">
                                       <blockquote class="blockquote mb-0">
                                           <p>${answer2}</p>
@@ -160,97 +161,103 @@
                                       </blockquote>
                                   </div>
                                 </div>`
-                  
-                  $('#comment').append(temp_html)
 
-                }
+            $('#comment').append(temp_html)
 
-                    
-                  }
-
-                })
-              }
+          }
 
 
-        {#function get_anser() {#}
-        {#  $.ajax({#}
-        {#    type: "GET",#}
-        {#    url: `/answer/${question_id}`,#}
-        {#    success: function (response) {#}
-        {#      let question_list = response['question_list']#}
-        {#      #}
-        {#    }#}
-        {#  })#}
-        {#}#}
-
-        function answer_save(){
-          
-            const answer_detail = $('#saveans').val();
-            
-            $.ajax({
-                type: "POST",
-                url: "/post/answer",
-                data: {'question_id': question_id, 'answer_detail': answer_detail},
-                success: function (response) {
-                    alert(response['message'])
-                    window.location.reload();
-                }
-            })
         }
 
-    </script>
+      })
+    }
+
+    function get_anser() {
+      $.ajax({
+        type: "GET",
+        url: `/answer/${question_id}`,
+        success: function (response) {
+          let question_list = response['question_list']
+          question_id = question_list['question_id']
+        }
+      })
+    }
 
 
-  </head>
-  <body>
-    {% include "header.html" %}
-    <div class ="Box">
-        <div class="mytit" id="title1"><h2>{{question_list.question_title}}</h2></div>
-      
-        <table border="5" bordercolor="#fce4ec" width ="500" height="50" align = "center" >
-          <tr id="table" align ="center">
-            <p>
-              <td>{{question_list.user_name}}  </td>
-              <td>  좋아요: {{question_list.q_heart_count}}</td>
-              <td> 댓글: </td>
-              <td>  </td>
-              <td>  </td>
-              <td> {{question_list.question_date}} </td>
-              <td> {{question_list.main_ability}} </td>
-            </p>  
-          </tr> 
-        </table>
-        <p></p>
-        <table border="5" bordercolor="#fce4ec" width ="500" height="400" align = "center" >
-          <tr id="contents">
-             <p><td style="vertical-align: top; text-align:left;">
-              <font size ="6"> {{question_list.question_detail}}</font>
-             </td></p>
-            </tr>  
-        </table>
-        
-        <p></p>
-        <div class="thumbs">
-          <button class="btn-like">👍 좋아요</button>
-        </div>
-        <div class="mybox">
-          <div class="mycomment">
-              <input id="saveans" class="form-control" type="text" placeholder="댓글을 입력하세요">
-              <button onclick="answer_save()" type="button" class="btn btn-outline-primary">입력</button>
-          </div>
-        </div>
+    function answer_save() {
 
-        <div class="mycards" id="comment">
-          <div class="card">
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p></p>
-                    <footer class="blockquote-footer">{{question_list.user_name}}</footer>
-                </blockquote>
-            </div>
-          </div>            
+      const answer_detail = $('#saveans').val();
+
+      $.ajax({
+        type: "POST",
+        url: "/post/answer",
+        data: { 'question_id': question_id, 'answer_detail': answer_detail },
+        success: function (response) {
+          alert(response['message'])
+          window.location.reload();
+        }
+      })
+    }
+
+  </script>
+
+
+</head>
+
+<body>
+  {% include "header.html" %}
+  <div class="Box">
+    <div class="mytit" id="title1">
+      <h2>{{question_list.question_title}}</h2>
+    </div>
+
+    <table border="5" bordercolor="#fce4ec" width="500" height="50" align="center">
+      <tr id="table" align="center">
+        <p>
+          <td>{{question_list.user_name}} </td>
+          <td> 좋아요: {{question_list.q_heart_count}}</td>
+          <td> 댓글: </td>
+          <td> </td>
+          <td> </td>
+          <td> {{question_list.question_date}} </td>
+          <td> {{question_list.main_ability}} </td>
+        </p>
+      </tr>
+    </table>
+    <p></p>
+    <table border="5" bordercolor="#fce4ec" width="500" height="400" align="center">
+      <tr id="contents">
+        <p>
+          <td style="vertical-align: top; text-align:left;">
+            <font size="6"> {{question_list.question_detail}}</font>
+          </td>
+        </p>
+      </tr>
+    </table>
+
+    <p></p>
+    <div class="thumbs">
+      <button class="btn-like">👍 좋아요</button>
+    </div>
+    <div class="mybox">
+      <div class="mycomment">
+        <input id="saveans" class="form-control" type="text" placeholder="댓글을 입력하세요">
+        <button onclick="answer_save()" type="button" class="btn btn-outline-primary">입력</button>
+      </div>
+    </div>
+
+    <div class="mycards" id="comment">
+      <div class="card">
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p></p>
+            <footer class="blockquote-footer">{{question_list.user_name}}</footer>
+          </blockquote>
         </div>
-    </div>  
-    <script src="/static/js/heart.js"></script>
-  </body>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/heart.js"></script>
+</body>
+
 </html>
