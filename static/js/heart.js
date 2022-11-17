@@ -4,16 +4,33 @@ q_heart.addEventListener('click', questHeartClick)
 
 function questHeartClick(){
     console.log('this is heart');
-    done_bucket();
+    question_heart();
+}
+function answerHeartClick(id){
+    console.log(id,'this is heart');
+    answer_heart(id)
 }
 
 
-function done_bucket() {
+function question_heart() {
     $.ajax({
         type: "POST",
-        url: "/heart/update",
+        url: "/heart/question",
         data: {
             quest_id : 8 ,
+        },
+        success: function (response) {
+            console.log(response)
+        }
+    });
+}
+
+function answer_heart(id) {
+    $.ajax({
+        type: "POST",
+        url: "/heart/answer",
+        data: {
+            answer_id : id ,
         },
         success: function (response) {
             console.log(response)
