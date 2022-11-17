@@ -42,58 +42,151 @@
       }
 
       .mytit {
+        linear-gradient(45deg, #553c9a, #ee4b2b);
         width: 500px;
         height: 70px;
-        margin: auto;
-        margin-top: 50px;
-
+        margin: 60px auto;
+        
         background-color:  #fce4ec;
         border-radius: 10px;
-
-        text-align: center;
-
-        color: black;
-
+      
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
       }
+     
+        .comment-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }   
 
       .table {
-        width: 900px;
+        width: 500px;
         margin: auto;
-        margin-top: 50px;
         margin-bottom: 10px;
       }
       .contents {
-        width: 900px;
-        margin: auto;
-        height: 600px;
+        height: 300px;
       }
+    
       .thumbs {
-        width: 900px;
-        margin: auto;
-        height: 50px;
-      }
-      .comment{
-        width: 900px;
-        margin: auto;
+        text-align: center;
+        
         
       }
-      .answer {
-        background-color:  #fce4ec;
-        width: 700px;
-        margin: auto 20px auto 10px;
-
+      .btn-like {
+        display: inline-block;
+        border-radius: 20px;
+        color: transparent;
+        text-shadow: 0 0 2px rgba(255,255,255,.7), 0 0 0 #000;
+        
+      }  
+      .btn-like:hover {
+        text-shadow: 0 0 0 #ea0;
+        
       }
+    
+      .mybox {
+        width: 95%;
+        max-width: 500px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px 0px lightblue;
+        margin: 20px auto;
+      }
+
+      .mycomment {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;    
+      }
+
+      .mycomment > input {
+        width: 80%;
+      }
+      
+      .mycards {
+        width: 95%;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .mycards > .card {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    textarea {
+      width : 500px;
+      height : 400px;
+      border: 0px solid #fce4ec
+    }
+
+
+    
+
     
     </style>
     <script>
-        const question_id = 8
+          $(document).ready(function(){
+
+            get_anser()
+        });
+        const question_id = 8 //주는 형식에 맞춰 받는 로직 짜야댐
+
+
+        function get_anser() {
+          $.ajax({
+            type: "GET",
+            url: `/answer/${question_id}`,
+            success: function (response) {
+              let rows = response ['question_list']
+              for( let i = 0; i < rows.length; i ++){
+                  let title = rows[i]['question_title']
+                  let name = rows[i]['user_name']
+                  let comment = rows[i]['answer_detail']
+                  let date = rows[i]['answer_date']  
+                  let contents = rows[i]['question_detail']
+                  let main = rows[i]['main_detail']
+
+                  let temp_html = `<h2>${title}</h2>`
+                  
+                  let temp_html0 = `<p><td>
+                                   ${contents}
+                                  </td></p>`
+                  
+                  let temp_html1 = `<p>
+                                      <td>${name}  </td>
+                                      <td>  좋아요:0</td>
+                                      <td> 댓글:0 </td>
+                                      <td>  </td>
+                                      <td>  </td>
+                                      <td> ${date} </td>
+                                      <td> ${main} </td>
+                                    </p>`
+                  
+                  let temp_html2 = `<div class="card">
+                                        <div class="card-body">
+                                            <blockquote class="blockquote mb-0">
+                                                <p>${comment}</p>
+                                                <footer class="blockquote-footer">${name}</footer>
+                                            </blockquote>
+                                        </div>
+                                    </div>`
+
+                  $('#title1').append(temp_html)
+                  $('#contents').append(temp_html0)
+                  $('#table').append(temp_html1)
+                  $('#comment').append(temp_html2)
+
+              }
+            }
+          })
+        }
 
         function answer_save(){
-
+          
             const answer_detail = $('.form-control').val();
             console.log(answer_detail)
             $.ajax({
@@ -112,59 +205,34 @@
 
   </head>
   <body>
-    <div class="mytit">Q & A 게시글 제목</div>
-    <table class="table" border="1">
-      <thead>
-        <th scope="col" width="120">닉네임:</th>
-        <th scope="col" width="120">추천:</th>
-        <th scope="col" width="120">댓글:</th>
-        <th scope="col" width="600"></th>
-        <th width="250"></th>
-        <th scope="col" width="150">기술스택</th>
-      </thead>
-      <tr class="contents">
-        <td>내용</td>
-      </tr>
-      <table class="thumbs" border="1">
-        <td align="center">👍 추천</td>
-      </table>
-    </table>
-    <p></p>
-    <div class="comment">
-        <div class="input-group mb-3">
-        <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button onclick="answer_save()" class="btn btn-outline-secondary" type="button" id="button-addon2">등록</button>
-      </div>
-    </div>
-    <table class="table">
-          <tr>
-            <td align="center" width ="60">닉네임</td>
-            <td>
-                <p class="answer">.</p>
-            </td>
-            <td>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">추천</button>
-            </td>
-          </tr>
-          <tr>
-            <td align="center" width ="60">닉네임</td>
-            <td>
-                <p class="answer">.</p>
-            </td>
-            <td>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">추천</button>
-            </td>
-          </tr>
-          <tr>
-            <td align="center" width ="60">닉네임</td>
-            <td>
-                <p class="answer">,</p>
-            </td>
-            <td>
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">추천</button>
-            </td>
-          </tr>
-      </table>
-    
+    <div class ="Box">
+      
+        <div class="mytit" id="title1"></div>
+      
+        <table border="5" bordercolor="#fce4ec" width ="500" height="50" align = "center" >
+          <tr id="table" align ="center">  
+          </tr> 
+        </table>
+        <p></p>
+        <table border="5" bordercolor="#fce4ec" width ="500" height="400" align = "center" >
+          <tr id="contents">
+            
+        </table>
+        
+        <p></p>
+        <div class="thumbs">
+          <button class="btn-like">👍 좋아요</button>
+        </div>
+        <div class="mybox">
+          <div class="mycomment">
+              <input id="bucket" class="form-control" type="text" placeholder="댓글을 입력하세요">
+              <button onclick="answer_save()" type="button" class="btn btn-outline-primary">입력</button>
+          </div>
+        </div>
+
+        <div class="mycards" id="comment">
+            
+        </div>
+    </div>  
   </body>
 </html>
