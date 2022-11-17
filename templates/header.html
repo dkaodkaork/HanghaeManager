@@ -1,14 +1,17 @@
+<link rel="stylesheet" href="/static/css/header.css">
+
 <nav class="navbar navbar-light bg-light header">
-    <h2> <a class="link" href="../bulletin-board">제2의 항해99 매니저</a> </h2>
-    <div>
+    <h2 class="home-title" onclick="location.href='/bulletin-board'">제2의 항해 매니저</h2>
+    <div class="head-btn-box">
         {% if username %}
         {#{{ username }}#}
-        <button class="header_rightBtn" onclick="logout()">로그아웃</button>
-        <button class="header_rightBtn" onclick="location.href='/mypage'">마이페이지</button>
+        <button class="button header_rightBtn" onclick="logout()">로그아웃</button>
+        <button class="button header_rightBtn" onclick="location.href='/mypage'">마이페이지</button>
         {% endif %}
         {% if not username %}
-        <button class="header_rightBtn" onclick="location.href='/login'">로그인</button>
-        <button class="header_rightBtn" onclick="location.href='/join'">회원가입</button>
+        <button class="button header_rightBtn" onclick="location.href='/login'">로그인</button>
+        <button class="button header_rightBtn" onclick="location.href='/join'">회원가입</button>
         {% endif %}
     </div>
 </nav>
+

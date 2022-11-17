@@ -8,18 +8,45 @@
     --font-basic: S-CoreDream-3Light;
 }
 
-.header{
+.header {
     height: 100px;
-    background-color: var(--color-4);
+    background-color: #00796B;
     justify-items: center;
     display: flex;
     align-items: center;
 }
 
-.home-title{
+.button {
+    background-color: white ;
+    color: #00796B;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'S-CoreDream-5Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: 1000;
+    margin: 10px;
 }
 
-.link{
+.button:hover,
+.button:focus {
+    background-color: #2a9d8f;
+    color: white;
+}
+.head-btn-box{
+    position: absolute;
+    right: 50px;
+
+}
+
+.home-title {
+    font-family: var(--font-point);
+    color: white;
+    left:10px;
+    position: absolute;
+    left:50px;
+}
+
+.link {
     text-decoration: none;
     color: var(--color-5);
 }

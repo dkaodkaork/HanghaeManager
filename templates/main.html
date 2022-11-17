@@ -9,7 +9,7 @@
     <!-- local css and JS-->
     <link rel="stylesheet" href="/static/css/bord.css">
     <link rel="stylesheet" href="/static/css/main.css">
-    <link rel="stylesheet" href="/static/css/header.css">
+    <!-- <link rel="stylesheet" href="/static/css/header.css"> -->
 
 
     <title>Main</title>
@@ -43,9 +43,9 @@
                         </form>
                     </div>
                     <div class="text-btn-con">
-                        <button id="question-made" class="text-btn">질문 작성하기</button>
-                        <button id="order-latest" class="text-btn">날짜순</button>
-                        <button id="order-likes" class="text-btn">좋아요순</button>
+                        <button id="question-made" class="text-btn" onclick="location.href='/question'">질문 작성하기</button>
+                        <button id="order-latest" class="text-btn" onclick="clickLatest()">날짜순</button>
+                        <button id="order-likes" class="text-btn" onclick="clickLikes()">좋아요순</button>
                     </div>
 
                 </div>

@@ -45,7 +45,10 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
-
+@login.route('/login/aaa', methods=['POST'])
+def test():
+    return render_template('login.html')
+    
 @login.route('/name', methods=['GET'])
 def api_valid():
     token_receive = request.cookies.get('mytoken')
