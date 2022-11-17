@@ -362,6 +362,8 @@
 
         function move_post(question_id) {
             // 게시글로 이동
+             window.location.href = `/answer/${question_id}`
+
         }
 
         function post_update(question_id) {
@@ -420,7 +422,6 @@
         },
         success: function (response) {
             alert(response['message']);
-            window.location.reload();
 
         }
                 })

@@ -37,7 +37,7 @@ def question_post():
 
         question_list = list(db.testQuestions.find({},{'_id': False}))
         count = len(question_list) +1
-
+        print(count)
         question_date = common_function.now_time('othertime')
 
 
