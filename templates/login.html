@@ -40,27 +40,34 @@
             font-weight: normal;
             font-style: normal;
             color: #00796B;}
+
+
         .button {
             background-color: var(--color-4);
             color: var(--color-3);
-            margin-top: 20px;
             border-radius: 10px;
             padding: 10px 20px;
              font-family: 'S-CoreDream-5Light';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
             font-weight: normal;
             font-style: normal;
+            margin-top: 30px;
         }
-        .loginbutton {
-             background-color: var(--color-4);
-            color: var(--color-3);
-            margin-top: 20px;
+
+        .button:hover, .button:focus{
+            background-color: #2a9d8f;
+            color: white;
+        }
+        .joinbutton {
+            background-color: white;
+            color: var(--color-4);
             border-radius: 10px;
             padding: 10px 20px;
-             font-family: 'S-CoreDream-5Light';
+            font-family: 'S-CoreDream-5Light';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-            font-weight: normal;
+            font-weight: bold;
             font-style: normal;
+            margin-bottom: 30px;
 
         }
         .section{
@@ -69,7 +76,7 @@
             width: 100%;
             margin: 20px auto 0px auto;
             box-shadow: 0px 0px 3px 0px white;
-            padding: 15px 25px;
+            padding: 30px 30px;
             display: flex;
             flex-direction: column;
             text-align: center;
@@ -86,7 +93,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;}
+            min-height: 150vh;}
+
+        .label{
+            display: inline-block;
+            float: left;
+            clear: left;
+            text-align: right;
+            width: 80px;
+            margin-right: 10px;
+
+        }
+
+        .field-body{
+            display: inline-block;
+            float: left;
+        }
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -126,7 +148,7 @@
 <body>
 <div class="section">
     <h1 class="title">제 2의 항해매니저</h1>
-    <button class="loginbutton" onclick=window.location.href='/join'>회원가입 하러 가기</button>
+    <button class="joinbutton" onclick=window.location.href='/join'>회원가입 하러 가기</button>
     <div class="container" style="width:60%">
         <div class="field is-horizontal">
             <div class="field-label is-normal">
