@@ -4,6 +4,10 @@ from routes.login import login
 from routes.main import main
 from routes.mypage import mypage
 from routes.question import question
+from routes.answer import answer
+from routes.heart import heart
+from routes.post import post
+
 
 app = Flask(__name__)
 
@@ -13,6 +17,9 @@ app.register_blueprint(login)
 app.register_blueprint(main)
 app.register_blueprint(mypage)
 app.register_blueprint(question)
+app.register_blueprint(answer)
+app.register_blueprint(heart)
+app.register_blueprint(post)
 
 
 @app.route('/')
