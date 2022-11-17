@@ -7,6 +7,11 @@
     --font-point: Cafe24Ssurround;
     --font-basic: S-CoreDream-3Light;
 }
+*{
+    font-family: var(--font-basic);
+    font-weight: bold;
+}
+
 body{
     background-color: var(--color-3);
 }

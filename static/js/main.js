@@ -60,7 +60,7 @@ function show_questions(like = false, rvs = true) {
                 console.log(question_date, qestion_heart)
 
                 let temp_html = `
-                    <tr id="quest-list" class="quest-list ${question_category}" >
+                    <tr id="quest-list" class="quest-list ${question_category}" onclick="location.href='/answer/${question_id}'">
                         <td class="ability">${question_category}</td>  
                         <td class="title quest-title" >${question_title}</td>
                         <td class="author">${user_name}</td>
@@ -72,12 +72,6 @@ function show_questions(like = false, rvs = true) {
         }
     });
 }
-
-
-{/* <button id="btn-all" class="category-btn"></button>
-<button id="btn-react" class="category-btn"></button>
-<button id="btn-node" class="category-btn"></button>
-<button id="btn-spring" class="category-btn"></button> */}
 
 // filtering
 jQuery(function ($) {
@@ -158,13 +152,6 @@ function onSearchSubmit(event) {
 
 searchForm.addEventListener('submit', onSearchSubmit)
 
-
-const latestBtn = document.querySelector("#order-latest");
-const likesBtn = document.querySelector("#order-likes");
-
-latestBtn.addEventListener('click', clickLatest)
-likesBtn.addEventListener('click', clickLikes)
-
 function clickLatest() {
     console.log('latest');
     $('#question_list').children().remove()
@@ -175,17 +162,4 @@ function clickLikes() {
     console.log('likes');
     $('#question_list').children().remove()
     show_questions(true);
-}
-
-
-// return jsonify({'result': 'success', 'user_name': userinfo['user_name']})
-function user_test() {
-    $.ajax({
-        type: 'GET',
-        url: '/bulletin-board/name',
-        data: {},
-        success: function (response) {
-            console.log(response)
-        }
-    });
 }
