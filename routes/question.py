@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template ,request, jsonify
+from flask import Blueprint, render_template ,request, url_for, jsonify, redirect
 from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
@@ -53,8 +53,7 @@ def question_post():
         }
 
         db.question.insert_one(doc)
-        return jsonify({'message': "게시글 등록 완료! "})
+        return jsonify({"success": "success", "message": "게시글 등록 완료!"})
 
     else:
-
-        return jsonify({'message': "다시 시도해주세요. "})
+        return jsonify({"success": "fail", 'message': "다시 시도해주세요."})
