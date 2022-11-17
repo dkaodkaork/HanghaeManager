@@ -84,29 +84,31 @@
   
       </style>
       <script>
+        
           function save_question() {
               let title = $('#title').val()
               let main = $('#main').val()
               let detail = $('#detail ').val()
               let main_value = $('#main option:selected').attr('value')
-  
+              
               if (!(title && main && main_value)) {
-                  alert("내용이 작성되지 않은 곳이 있습니다. 확인해주세요!")
+                return alert("내용이 작성되지 않은 곳이 있습니다. 확인해주세요!")
+              } else if (confirm("게시글을 올리겠습니까?") == true){
+                alert("저장 완료!")
               } else {
-                  confirm("게시글을 올리겠습니까?")
+                return
               }
-          }
-  
+         
+            
               $.ajax({
                   type: 'POST',
-                  url: '/question',
+                  url: '/question/question',
                   data: { question_title_give:title, question_detail_give:detail, main_ability_give:main},
                   success: function (response) {
-                      alert(response['msg'])
-                      window.location.reload()
+                      
                   }
               });
-  
+           }
       </script>
   
   </head>
@@ -124,11 +126,11 @@
               </td>
               <td width = 200>
                       <select id="main">
-                        <option selected>주특기를 선택해주세요</option>
+                        <option selected> 주특기를 선택해주세요 </option>
                         <option value="1">Spring</option>
                         <option value="2">Node.js</option>
                         <option value="3">React</option>
-                        <option value="3">기타</option>
+                        <option value="4">기타</option>
                       </select>
               </td>
           </tr>

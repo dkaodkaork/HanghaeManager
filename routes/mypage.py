@@ -15,9 +15,15 @@ mypage = Blueprint("mypage", __name__, url_prefix="/mypage")
 @mypage.route('/')
 def mypage_home():
     user_id = "qwer"
-    user = db.users.find_one({'user_id': user_id}, {'_id': False})
 
-    return render_template('mypage.html', user_name=user['user_name'], til_count=user['til_count'])
+    user = db.users.find_one({'user_id': user_id}, {'_id': False})
+    til_count = user['til_count']
+
+    # 자신의 til_count보다 높은 유저들의 list 길이
+    til_rank = len(list(db.users.find({'til_count': {'$gt': til_count}})))
+    til_rank = til_rank + 1
+
+    return render_template('mypage.html', user_name=user['user_name'], til_count=til_count, til_rank=til_rank)
 
 
 # 내가 작성했던 리스트 및 til 데이터 get
@@ -56,20 +62,26 @@ def mypage_til_save():
     user_id = "qwer"
 
     til_url = request.form['til_url']
-    print(til_url)
     til_count = request.form['til_count']
+    print(til_url)
     print(til_count)
+
     date = common_function.now_time('sametime')
     today_til = db.til.find_one({'user_id': user_id, 'til_date': date})
+
     if today_til is None:
+
         db.users.update_one({'user_id': user_id}, {'$set': {'til_count': int(til_count) + 10}})
+
         doc = {
             'user_id': user_id,
             'til_url': til_url,
             'til_date': date
         }
+
         db.til.insert_one(doc)
         return jsonify({"message": "축하드려요 🎉 + 10 점을 획득하셨습니다! "}), 200
+
     else:
         return jsonify({"message": "하루에 한번만 가능합니다."}), 200
 
@@ -89,6 +101,7 @@ def post_update():
     if post['user_id'] == user_id:
         db.question.update_one({'question_id': question_id}, {'$set': {'question_detail': question_detail}})
         return jsonify({"message": "success"}), 200
+
     else:
         # 같지 않다면 fail
         return jsonify({"message": "fail"}), 203
@@ -109,6 +122,7 @@ def post_delete():
         db.question.delete_one({'question_id': question_id})
         # question의 answer들도 삭제하는 로직 추가 구현 필요
         return jsonify({"message": "success"}), 200
+
     else:
         # 같지 않다면 fail
         return jsonify({"message": "fail"}), 203

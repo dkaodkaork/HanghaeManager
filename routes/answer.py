@@ -10,18 +10,22 @@ load_dotenv()
 DB = os.getenv('DB')
 client = MongoClient(DB, tlsCAFile=certifi.where())
 
-db = client.testQuestions
+db = client.manager
 
 @answer.route('/')
 def answer_home():
     return render_template('answer.html')
 
 
+@answer.route("/<question_id>", methods=["GET"])
+def question_detail_get(question_id):
+    print(question_id)
+    question_list = list(db.question.find({'question_id': int(question_id)},{'_id':False}))
+    print(( question_list))
+    return jsonify({'question_list': question_list})
 
 
 
 
 
 
-
-# 서버 쪽에서 일단 게시글 제목 가져오기 ,
