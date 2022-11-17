@@ -1,4 +1,3 @@
-
 from flask import Blueprint, render_template, request, jsonify
 
 join = Blueprint("join", __name__, url_prefix="/join")
@@ -12,30 +11,24 @@ import datetime
 import hashlib
 
 
-
 @join.route('/')
 def join_home():
     return render_template('join.html')
 
-# @join.route('/check', methods=['POST'])
-# def id_overlap_check(request):
-#     id_receive = request.form['id_give']
-#     try:
-#         # 중복 검사 실패
-#         user = db.users.find_one(id_receive)
-#     except:
-#         # 중복 검사 성공
-#         user = None
-#     if user is None:
-#         overlap = "pass"
-#     else:
-#         overlap = "fail"
-#     return jsonify({'result': 'fail'})
+
+@join.route('/check', methods=['GET'])
+def id_overlap_check():
+    user_id = request.args.get('user_id')
+    result = db.users.find_one({'user_id': user_id})
+
+    if result == None:
+        doc = {"message": "사용 가능한 아이디 입니다.", "success": True}
+        return jsonify(doc)
+    else:
+        doc = {"message": "이미 사용중인 아이디 입니다.", "success": False}
+        return jsonify(doc)
 
 
-# [회원가입 API]
-# id, pw, nickname을 받아서, mongoDB에 저장합니다.
-# 저장하기 전에, pw를 sha256 방법(=단방향 암호화. 풀어볼 수 없음)으로 암호화해서 저장합니다.
 @join.route('/join', methods=['POST'])
 def api_join():
     id_receive = request.form['id_give']
@@ -49,9 +42,10 @@ def api_join():
         'user_id': id_receive,
         'user_pw': pw_hash,
         'user_name': name_receive,
-        'til_count': til_count
+        'til_count': til_count,
+        'q_heart_list': [],
+        'a_heart_list': []
     }
 
-
-    db.user.insert_one(doc)
+    db.users.insert_one(doc)
     return jsonify({'result': 'success'})
