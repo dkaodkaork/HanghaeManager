@@ -35,7 +35,7 @@ def question_post():
         question_detail_receive = request.form['question_detail_give']
         main_ability_receive = request.form['main_ability_give']
 
-        question_list = list(db.testQuestions.find({},{'_id': False}))
+        question_list = list(db.question.find({},{'_id': False}))
         count = len(question_list) +1
         print(count)
         question_date = common_function.now_time('othertime')
@@ -55,6 +55,7 @@ def question_post():
         }
 
         db.question.insert_one(doc)
+
         return jsonify({"success": "success", "message": "게시글 등록 완료!"})
 
     else:

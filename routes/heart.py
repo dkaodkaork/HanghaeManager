@@ -4,17 +4,12 @@ import os
 from pymongo import MongoClient
 import certifi
 import jwt
+from db import db
 
 SECRET_KEY = 'HANGHAE'
 
 
 heart = Blueprint("heart", __name__, url_prefix="/heart")
-
-load_dotenv()
-DB = os.getenv('DB')
-client = MongoClient(DB, tlsCAFile=certifi.where())
-
-db = client.manager
 
 
 @heart.route('/')

@@ -31,6 +31,7 @@ def answer_insert():
 
             # question_id일 때의 데이터 중 answer_list의 값 중 가장 최신일 때의 데이터
             question = db.question.find_one({'question_id': question_id}, {'answer_list': {'$slice': -1}})
+            print(question)
             # 가장 최신의 answer_id를 가져옴
             answer_id = question['answer_list'][0]['answer_id']
             answer_id = answer_id + 1
