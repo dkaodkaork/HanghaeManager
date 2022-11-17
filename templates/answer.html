@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-
+    
     <title>Title</title>
 
     <style>
@@ -129,66 +129,61 @@
     
     </style>
     <script>
-          $(document).ready(function(){
-
-            get_anser()
+          $(document).ready(function () {
+            show_answer();
         });
-        const question_id = 8 //주는 형식에 맞춰 받는 로직 짜야댐
+        function show_answer(){
+            
+          $.ajax({
+                type: "GET",
+                url: `/answer/${question_id}1`,
+                data: {},
+                success: function (response) {
+                  console.log('12312')
+                  let rows = response['question_list']
+                  
+                  console.log('rows : ',rows)
 
+                  let answer1 = rows['answer_list']
+
+                  for (let i = 0 ; i < answer1.length ; i++){
+                  let answer2 = answer1[i]['answer_detail']
+                  let username = answer1[i]['user_name']
+                  let temp_html =`<div class="card">
+                                  <div class="card-body">
+                                      <blockquote class="blockquote mb-0">
+                                          <p>${answer2}</p>
+                                          <footer class="blockquote-footer">${username}</footer>
+                                      </blockquote>
+                                  </div>
+                                </div>`
+                  
+                  $('#comment').append(temp_html)
+
+                }
+
+                    
+                  }
+
+                })
+              }
+        const question_id = 8
 
         function get_anser() {
           $.ajax({
             type: "GET",
             url: `/answer/${question_id}`,
             success: function (response) {
-              let rows = response ['question_list']
-              for( let i = 0; i < rows.length; i ++){
-                  let title = rows[i]['question_title']
-                  let name = rows[i]['user_name']
-                  let comment = rows[i]['answer_detail']
-                  let date = rows[i]['answer_date']  
-                  let contents = rows[i]['question_detail']
-                  let main = rows[i]['main_detail']
-
-                  let temp_html = `<h2>${title}</h2>`
-                  
-                  let temp_html0 = `<p><td>
-                                   ${contents}
-                                  </td></p>`
-                  
-                  let temp_html1 = `<p>
-                                      <td>${name}  </td>
-                                      <td>  좋아요:0</td>
-                                      <td> 댓글:0 </td>
-                                      <td>  </td>
-                                      <td>  </td>
-                                      <td> ${date} </td>
-                                      <td> ${main} </td>
-                                    </p>`
-                  
-                  let temp_html2 = `<div class="card">
-                                        <div class="card-body">
-                                            <blockquote class="blockquote mb-0">
-                                                <p>${comment}</p>
-                                                <footer class="blockquote-footer">${name}</footer>
-                                            </blockquote>
-                                        </div>
-                                    </div>`
-
-                  $('#title1').append(temp_html)
-                  $('#contents').append(temp_html0)
-                  $('#table').append(temp_html1)
-                  $('#comment').append(temp_html2)
-
-              }
+              let question_list = response['question_list']
+              
             }
           })
         }
 
         function answer_save(){
           
-            const answer_detail = $('.form-control').val();
-            console.log(answer_detail)
+            const answer_detail = $('#saveans').val();
+            
             $.ajax({
                 type: "POST",
                 url: "/post/answer",
@@ -207,16 +202,28 @@
   <body>
     {% include "header.html" %}
     <div class ="Box">
-        <div class="mytit" id="title1"></div>
+        <div class="mytit" id="title1"><h2>{{question_list.question_title}}</h2></div>
       
         <table border="5" bordercolor="#fce4ec" width ="500" height="50" align = "center" >
-          <tr id="table" align ="center">  
+          <tr id="table" align ="center">
+            <p>
+              <td>{{question_list.user_name}}  </td>
+              <td>  좋아요: {{question_list.q_heart_count}}</td>
+              <td> 댓글: </td>
+              <td>  </td>
+              <td>  </td>
+              <td> {{question_list.question_date}} </td>
+              <td> {{question_list.main_ability}} </td>
+            </p>  
           </tr> 
         </table>
         <p></p>
         <table border="5" bordercolor="#fce4ec" width ="500" height="400" align = "center" >
           <tr id="contents">
-            
+             <p><td style="vertical-align: top; text-align:left;">
+              <font size ="6"> {{question_list.question_detail}}</font>
+             </td></p>
+            </tr>  
         </table>
         
         <p></p>
@@ -225,13 +232,20 @@
         </div>
         <div class="mybox">
           <div class="mycomment">
-              <input id="bucket" class="form-control" type="text" placeholder="댓글을 입력하세요">
+              <input id="saveans" class="form-control" type="text" placeholder="댓글을 입력하세요">
               <button onclick="answer_save()" type="button" class="btn btn-outline-primary">입력</button>
           </div>
         </div>
 
         <div class="mycards" id="comment">
-            
+          <div class="card">
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p></p>
+                    <footer class="blockquote-footer">{{question_list.user_name}}</footer>
+                </blockquote>
+            </div>
+          </div>            
         </div>
     </div>  
     <script src="/static/js/heart.js"></script>
