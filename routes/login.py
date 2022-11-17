@@ -45,7 +45,10 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
-
+@login.route('/login/aaa', methods=['POST'])
+def test():
+    return render_template('login.html')
+    
 @login.route('/name', methods=['GET'])
 def api_valid():
     token_receive = request.cookies.get('mytoken')
@@ -61,3 +64,4 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
