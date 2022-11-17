@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="/static/css/header.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script> 
+<script src="/static/js/logout.js"></script>
+
 <nav class="navbar navbar-light bg-light header">
-    <h2 class="home-title" onclick="location.href='/bulletin-board'">제2의 항해 매니저</h2>
+    <h2 class="home-title" onclick="location.href='/'">제2의 항해 매니저</h2>
     <div class="head-btn-box">
         {% if username %}
         {#{{ username }}#}
