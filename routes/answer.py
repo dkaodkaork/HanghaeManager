@@ -22,7 +22,7 @@ def answer_home(question_id):
 
 @answer.route("/")
 def question_detail_get():
-    question_id = request.args.get(question_id)
+    question_id = request.args.get('question_id')
     question_list = db.question.find_one({'question_id': int(question_id)},{'_id':False})
     print(question_list)
     
