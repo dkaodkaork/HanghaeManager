@@ -94,6 +94,8 @@ body{
     background-size: cover;
     background-position: center;
     background-color: white;
+    border: 1px solid white;
+
     margin: 5px;
 }
 #btn-all{
@@ -116,8 +118,14 @@ body{
 }
 
 .text-btn{
-    font-size: 18px;
+    font-size: 16px;
     padding: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: var(--color-5);
+    border: 1px solid var(--color-5);
+    border-radius: 5px;
+    color: white;
 }
 
 .quest-bord {
@@ -161,8 +169,9 @@ body{
 .input-box {
     background: none;
     font-size: 18px;
+    height: 30px;
+    border: 1px solid white;
 }
-
 
 .quest-head {
     display: grid;

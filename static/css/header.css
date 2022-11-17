@@ -17,6 +17,8 @@
 }
 
 .button {
+
+    border: 1px solid var(--color-5);
     background-color: white ;
     color: #00796B;
     border-radius: 10px;
