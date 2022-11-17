@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 import certifi
+import datetime
+from datetime import date, timedelta
 
 answer = Blueprint("answer", __name__, url_prefix="/answer")
 
@@ -12,20 +14,25 @@ client = MongoClient(DB, tlsCAFile=certifi.where())
 
 db = client.manager
 
-@answer.route('/')
-def answer_home():
-    return render_template('answer.html')
 
 
-@answer.route("/<question_id>", methods=["GET"])
+@answer.route("/<question_id>")
+def answer_home(question_id):
+    
+    question_id = 8
+    question_list = db.question.find_one({'question_id': int(question_id)},{'_id':False})
+    
+    return render_template('answer.html' , question_list= question_list)
+
+
+
+
+@answer.route("/<question_id>1")
 def question_detail_get(question_id):
     print(question_id)
-    question_list = list(db.question.find({'question_id': int(question_id)},{'_id':False}))
-    print(( question_list))
+    question_id = 8
+    question_list = db.question.find_one({'question_id': int(question_id)},{'_id':False})
+    print(question_list)
+    
     return jsonify({'question_list': question_list})
-
-
-
-
-
 
