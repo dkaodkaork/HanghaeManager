@@ -1,13 +1,12 @@
 $(document).ready(function () {
     show_rank();
     show_questions();
-    user_test()
 });
 
 function show_rank() {
     $.ajax({
         type: 'GET',
-        url: '/bulletin-board/rank',
+        url: '/rank',
         data: {},
         success: function (response) {
             let rows = response['ranks']
@@ -33,7 +32,7 @@ function show_rank() {
 function show_questions(like = false, rvs = true) {
     $.ajax({
         type: 'GET',
-        url: '/bulletin-board/questions',
+        url: '/quest',
         data: {},
         success: function (response) {
             let rows = response['quests']
@@ -161,15 +160,4 @@ function clickLikes() {
     console.log('likes');
     $('#question_list').children().remove()
     show_questions(true);
-}
-
-function user_test(){
-    $.ajax({
-        type: 'GET',
-        url: '/bulletin-board/name',
-        data: {},
-        success: function (response) {
-            console.log(response)
-        }
-    });
 }

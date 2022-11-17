@@ -136,7 +136,7 @@
             
           $.ajax({
                 type: "GET",
-                url: `/answer/${question_id}1`,
+                url: `/answer?question_id=${question_id}1`,
                 data: {},
                 success: function (response) {
                   console.log('12312')
@@ -167,7 +167,7 @@
 
                 })
               }
-        const question_id = 8
+        let question_id
 
         function get_anser() {
           $.ajax({
@@ -175,7 +175,7 @@
             url: `/answer/${question_id}`,
             success: function (response) {
               let question_list = response['question_list']
-              
+              question_id = question_list['question_id']
             }
           })
         }

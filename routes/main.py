@@ -8,7 +8,7 @@ import jwt
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-main = Blueprint("main", __name__, url_prefix="/bulletin-board")
+main = Blueprint("main", __name__, url_prefix="/")
 
 DB = os.getenv('DB')
 client = MongoClient(DB, tlsCAFile=certifi.where())
@@ -39,11 +39,10 @@ def main_rank_get():
     rank_list = sorted(count_list, key= lambda x : x['til_count'], reverse=True)
     return jsonify({'ranks':rank_list[:5]})
 
-@main.route("/questions", methods=["GET"])
+@main.route("/quest", methods=["GET"])
 def main_questions_get():
     quests_list = list(db.question.find({}, {'_id': False}))
     # rank_list = sorted(count_list, key= lambda x : x['til_count'], reverse=True)
-    date = []
     for x in quests_list:
         # date = x['question_date'].strftime('%Y/%m/%d')
         x['question_date'] = str(x['question_date']).split(' ')[0]
