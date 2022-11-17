@@ -19,18 +19,19 @@ db = client.manager
 @answer.route("/<question_id>")
 def answer_home(question_id):
     
-    question_id = 8
-    question_list = db.question.find_one({'question_id': int(question_id)},{'_id':False})
+    # question_id = 8
+    question_list = db.question.find_one({'question_id': int(question_id)}, {'_id':False})
     
     return render_template('answer.html' , question_list= question_list)
 
 
 
 
-@answer.route("/<question_id>1")
-def question_detail_get(question_id):
-    print(question_id)
-    question_id = 8
+@answer.route("/")
+def question_detail_get():
+
+    # question_id = 8
+    question_id = request.args.get('question_id')
     question_list = db.question.find_one({'question_id': int(question_id)},{'_id':False})
     print(question_list)
     
