@@ -22,7 +22,7 @@ def question_post():
     question_detail_receive = request.form['question_detail_give']
     main_ability_receive = request.form['main_ability_give']
     
-    question_list = list(db.question_title.find({},{'_id':False}))
+    question_list = list(db.testQuestions.find({},{'_id':False}))
     count = len(question_list) +1
     
     doc = {
@@ -32,6 +32,6 @@ def question_post():
         'question_id': count
     }
     
-    db.testquestion.insert_one(doc)
-    return jsonify({'msg': '질문 작성 완료!'})
+    db.testQuestions.insert_one(doc)
+    return 
 
