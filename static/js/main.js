@@ -57,7 +57,6 @@ function show_questions(like = false, rvs = true) {
                 let question_date = rows[i]['question_date']
                 let question_category = rows[i]['main_ability']
                 let qestion_heart = rows[i]['q_heart_count']
-                console.log(question_date, qestion_heart)
 
                 let temp_html = `
                     <tr id="quest-list" class="quest-list ${question_category}" onclick="location.href='/answer/${question_id}'">
@@ -162,4 +161,15 @@ function clickLikes() {
     console.log('likes');
     $('#question_list').children().remove()
     show_questions(true);
+}
+
+function user_test(){
+    $.ajax({
+        type: 'GET',
+        url: '/bulletin-board/name',
+        data: {},
+        success: function (response) {
+            console.log(response)
+        }
+    });
 }
