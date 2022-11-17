@@ -15,9 +15,15 @@ mypage = Blueprint("mypage", __name__, url_prefix="/mypage")
 @mypage.route('/')
 def mypage_home():
     user_id = "qwer"
-    user = db.users.find_one({'user_id': user_id}, {'_id': False})
 
-    return render_template('mypage.html', user_name=user['user_name'], til_count=user['til_count'])
+    user = db.users.find_one({'user_id': user_id}, {'_id': False})
+    til_count = user['til_count']
+
+    # 자신의 til_count보다 높은 유저들의 list 길이
+    til_rank = len(list(db.users.find({'til_count': {'$gt': til_count}})))
+    til_rank = til_rank + 1
+
+    return render_template('mypage.html', user_name=user['user_name'], til_count=til_count, til_rank=til_rank)
 
 
 # 내가 작성했던 리스트 및 til 데이터 get
