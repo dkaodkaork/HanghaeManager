@@ -33,7 +33,7 @@ def mypage_home():
         return render_template('mypage.html', user_name=user['user_name'], til_count=til_count, til_rank=til_rank)
 
     else:
-        render_template('login.html')
+        return render_template('login.html')
 
 # 내가 작성했던 리스트 및 til 데이터 get
 @mypage.route('/data')
@@ -106,7 +106,7 @@ def mypage_til_save():
             return jsonify({"message": "하루에 한번만 가능합니다."}), 200
 
     else:
-        render_template('login.html')
+        return render_template('login.html')
 
 
 # 게시글 수정
@@ -134,14 +134,14 @@ def post_update():
             return jsonify({"message": "fail"}), 203
 
     else:
-        render_template('login.html')
+        return render_template('login.html')
 
 
 # 게시글 삭제
 @mypage.route('/deletion', methods=['POST'])
 def post_delete():
     user_check = jwt_check.user_check()
-
+    print(user_check['result'])
     if user_check['result'] != "fail":
         user_id = user_check['user_id']
 
@@ -161,4 +161,4 @@ def post_delete():
             return jsonify({"message": "fail"}), 203
 
     else:
-        render_template('login.html')
+        return render_template('login.html')
