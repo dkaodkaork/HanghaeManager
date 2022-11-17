@@ -9,12 +9,6 @@ from db import db
 
 answer = Blueprint("answer", __name__, url_prefix="/answer")
 
-# load_dotenv()
-# DB = os.getenv('DB')
-# client = MongoClient(DB, tlsCAFile=certifi.where())
-#
-# db = client.manager
-
 @answer.route("/<question_id>")
 def answer_home(question_id):
     question_list = db.question.find_one({'question_id': int(question_id)},{'_id':False})

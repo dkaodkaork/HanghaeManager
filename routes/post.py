@@ -5,15 +5,10 @@ import routes.login as jwt_check
 
 post = Blueprint("post", __name__, url_prefix="/post")
 
-@post.route('/')
-def post_home():
-    return render_template('answer.html')
-
-
 # 답변 저장 APi
 @post.route('/answer', methods=['POST'])
 def answer_insert():
-    # try:
+    try:
 
         user_check = jwt_check.user_check()
 
@@ -31,13 +26,13 @@ def answer_insert():
 
             # question_id일 때의 데이터 중 answer_list의 값 중 가장 최신일 때의 데이터
             question = db.question.find_one({'question_id': question_id}, {'answer_list': {'$slice': -1}})
-            print(question)
-            # 가장 최신의 answer_id를 가져옴
 
             if len(question['answer_list']) != 0:
+                # 가장 최신의 answer_id를 가져옴
                 answer_id = question['answer_list'][0]['answer_id']
                 answer_id = answer_id + 1
-            else: answer_id = 1
+            else:
+                answer_id = 1
         
             doc = {
                 'user_id': user_id,
@@ -57,4 +52,4 @@ def answer_insert():
         else:
             return render_template('login.html')
 
-    # except: return jsonify({"message": "다시 시도해주세요."})
+    except: return jsonify({"message": "다시 시도해주세요."})
