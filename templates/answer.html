@@ -129,6 +129,9 @@
     
     </style>
     <script>
+
+        const question_id = `{{question_list.question_id}}`
+
           $(document).ready(function () {
             show_answer();
         });
@@ -136,7 +139,7 @@
             
           $.ajax({
                 type: "GET",
-                url: `/answer/${question_id}1`,
+                url: `/answer?question_id=${question_id}`,
                 data: {},
                 success: function (response) {
                   console.log('12312')
@@ -167,18 +170,18 @@
 
                 })
               }
-        const question_id = 8
 
-        function get_anser() {
-          $.ajax({
-            type: "GET",
-            url: `/answer/${question_id}`,
-            success: function (response) {
-              let question_list = response['question_list']
-              
-            }
-          })
-        }
+
+        {#function get_anser() {#}
+        {#  $.ajax({#}
+        {#    type: "GET",#}
+        {#    url: `/answer/${question_id}`,#}
+        {#    success: function (response) {#}
+        {#      let question_list = response['question_list']#}
+        {#      #}
+        {#    }#}
+        {#  })#}
+        {#}#}
 
         function answer_save(){
           
