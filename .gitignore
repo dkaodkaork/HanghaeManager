@@ -1,3 +1,9 @@
 venv
 
 .env
+
+.idea
+
+testDB.py
+
+__pycache__

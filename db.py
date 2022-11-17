@@ -7,8 +7,8 @@ load_dotenv()
 DB = os.getenv('DB')
 client = MongoClient(DB, tlsCAFile=certifi.where())
 
-db = client.dbrollingPage
+db = client.manager
 
-db.user.insert_one({'test': 'mina'})
+
 
 print("success")

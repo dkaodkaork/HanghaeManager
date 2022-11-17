@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>회원가입</title>
 
     <style>
 
@@ -31,9 +31,225 @@
 
 
     </style>
+    <style>
+
+        .title {
+            font-style: normal;
+            font-weight: bold;
+            font-family: 'Cafe24Ssurround';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            color: #00796B;
+        }
+
+        body {
+            background-color: var(--color-4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .loginbutton {
+            background-color: white;
+            color: white;
+            margin-top: 20px;
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: var(--color-4);
+            width: 150px;
+            flex-direction: column;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'S-CoreDream-5Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+
+
+        }
+
+        .loginbutton:hover, .loginbutton:focus {
+            background-color: #00796B;
+            color: white;
+        }
+
+        .button {
+            background-color: var(--color-4);
+            color: var(--color-3);
+            margin-top: 20px;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-family: 'S-CoreDream-5Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            margin-bottom: 30px;
+        }
+
+        .button:hover, .button:focus{
+            background-color: white;
+            color: #354f52;
+            border-color: #00796B;
+        }
+
+        .label{
+            display: inline-block;
+            float: left;
+            clear: left;
+            text-align: right;
+            width: 80px;
+            margin-right: 10px;
+
+        }
+
+        .field-body{
+            display: inline-block;
+            float: left;
+        }
+
+        .id_overlap_button {
+            background-color: var(--color-4);
+            color: var(--color-3);
+            border-radius: 10px;
+            border-color: white;
+            padding: 10px 10px;
+            margin: 10px;
+
+        }
+
+        .id_overlap_button:hover, .id_overlap_button:focus {
+            background-color: white;
+            color: #354f52;
+            border-color: #00796B;
+        }
+
+        .section {
+            background-color: var(--color-3);
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto 0px auto;
+            box-shadow: 0px 0px 3px 0px white;
+            padding: 15px 25px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            border-radius: 10px;
+            align-items: center;
+            font-family: 'S-CoreDream-5Light';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+
+    </style>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script>
+        function id_overlap_check() {
+            let userid = $('#user_id').val()
+            if (userid == '') {
+                alert('아이디를 입력해주세요.'); //공백인 경우
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: "/join/check?user_id=" + userid,
+                    data: {},
+                    success: function (response) {
+                        alert(response['message']);
+                        if (response['success'] == false) {
+                            let input = document.getElementById("user_id");
+                            input.value = null;
+                        } else{$('.user_id').attr("check_result", "success");
+                            $('.id_overlap_button').hide();
+                                 }
+                        }
+                });
+            }
+        }
+
+
+        function join() {
+            if ($('.user_id').attr("check_result") == "fail") {
+                alert("아이디 중복확인을 해주시기 바랍니다.")
+            }
+            else if ($('.name_input').val() == '') {
+                alert("닉네임을 입력해주시기 바랍니다.");
+                $('.user_name').focus();
+            } else if ($('.pw_input').val() == '') {
+                alert('비밀번호를 입력해주세요.')
+                $('.user_pw').focus(); //공백인 경우
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/join/join",
+                    data: {
+                        id_give: $('#user_id').val(),
+                        pw_give: $('#user_pw').val(),
+                        name_give: $('#user_name').val()
+                    },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('회원가입이 완료되었습니다.')
+                            window.location.href = '/login'
+                        } else {
+                            alert('다시 시도하세요.')
+                        }
+                    }
+                })
+            }}
+
+
+    </script>
 
 </head>
 <body>
-joinPage Test
+
+<div class="section">
+    <h1 class="title">제 2의 항해 매니저</h1>
+    <button class="loginbutton" onclick=window.location.href='/login'>로그인 하러 가기</button>
+    <div class="box">
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <label for="user_id">ID </label>
+                        <input type="text" class="user_id" id="user_id" aria-describedby="emailHelp" placeholder="아이디"
+                              check_result="fail" required="required"/>
+                        <button type="button" class="id_overlap_button" onclick="id_overlap_check()">중복 확인</button>
+                        <img id="id_check_success" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <label for="user_name" class="label">USERNAME </label>
+                        <input type="text" class="name_input" id="user_name" placeholder="닉네임" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <label for="user_pw" class="label">PW </label>
+                        <input type="password" class="pw_input" id="user_pw" placeholder="비밀번호" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="button is-primary" onclick="join()">회원가입 하기</button>
+    </div>
+</div>
 </body>
 </html>

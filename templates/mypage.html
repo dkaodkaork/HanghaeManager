@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-     <style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <style>
         @font-face {
             font-family: 'Cafe24Ssurround';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
@@ -21,17 +23,477 @@
 
         :root {
             --color-1: #FCE4EC;
-            --color-2: #C2185B;
+            --color-2: rgba(194, 24, 91, 0.55);
             --color-3: #E0F2F1;
-            --color-4: #00796B;
+            --color-4: rgba(0, 121, 107, 0.31);
+            --color-5: rgb(0, 121, 107);
             --font-point: Cafe24Ssurround;
             --font-basic: S-CoreDream-3Light;
         }
 
+        * {
+            margin: 0;
+            padding: 0
+        }
 
+        body {
+            background-color: var(--color-3);
+        }
+
+        .container {
+            width: 80%;
+            min-width: 600px;
+            max-width: 900px;
+
+            height: 100%;
+            background-color: #E0F2F1;
+
+            position: absolute;
+            left: 38%;
+            margin-left: -250px;
+
+        }
+
+        .title {
+            margin-top: 10px;
+            font-size: 20px;
+            font-family: var(--font-point)
+        }
+
+        .body-header {
+            height: 7rem;
+            background-color: var(--color-4);
+        }
+
+        .body-header>span:hover {
+            font-weight: bolder;
+        }
+
+        .bi-house:hover {
+            width: 38px;
+            height: 38px;
+        }
+
+
+        .bi-house {
+            margin-top: 55px;
+            margin-left: 10%;
+        }
+
+
+        .middle-box {
+            height: 40%;
+            margin-top: 15px;
+        }
+
+
+        .graph-box {
+            width: 55%;
+            border-radius: 10px;
+            background-color: var(--color-4);
+            margin-left: 10px;
+            padding-top: 5px;
+        }
+
+
+        .til-box {
+            text-align: center;
+            width: 100%;
+            height: 71%;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .til-graph {
+            margin: 20px;
+        }
+
+        .til-circle {
+            width: 8%;
+            min-width: 27px;
+            max-width: 34px;
+
+            margin-left: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .my-til-score,
+        .my-til-rank {
+            margin-top: 40px;
+            width: 20%;
+            font-size: 30px;
+            font-weight: bold;
+
+
+        }
+
+        .my-til-score-background,
+        .my-til-rank-background {
+            position: relative;
+        }
+
+        .my-til-score-background>img,
+        .my-til-rank-background>img {
+            margin-top: 7px;
+
+        }
+
+        .my-til-score-background>p,
+        .my-til-rank-background>p {
+            position: absolute;
+            top: 35%;
+            left: 41%;
+            color: var(--color-5);
+
+        }
+
+        .submit-box {
+            width: 100%;
+            height: 20%;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        .submit-box>div {
+            margin: 1rem;
+        }
+
+        .submit-box>div>button {
+            font-size: 15px;
+            font-weight: bold;
+            padding: 12px;
+            margin-left: 10px;
+            width: 100px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: var(--color-5);
+            border: 1px solid var(--color-5);
+            color: white;
+
+        }
+
+        .submit-box>div>button:hover {
+            border: 2px solid white;
+        }
+
+        input {
+
+            width: 500px;
+            height: 40px;
+            font-size: 16px;
+            color: var(--color-5);
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 20px;
+
+            background-color: var(--color-4);
+
+        }
+
+
+        .my-post {
+            width: 100%;
+            height: 36%;
+            margin-top: 45px;
+            background-color: var(--color-3);
+
+        }
+
+        .my-post-list {
+            margin-top: 10px;
+            width: 100%;
+            height: 90%;
+            overflow: scroll;
+        }
+
+        .one-post-line {
+            margin-top: 15px;
+            margin-left: 30px;
+
+            text-align: center;
+            width: 91%;
+            display: flex;
+        }
+
+        .one-post-info {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .one-post-info:hover {
+            border: 2px solid var(--color-4);
+        }
+
+        .one-post-line>button {
+            margin-left: 10px;
+            width: 70px;
+            padding: 10px;
+
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            background-color: var(--color-5);
+            border: 1px solid var(--color-5);
+
+        }
+
+        .post-num {
+            font-weight: bold;
+            margin-left: 20px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .post-title {
+            width: 78%;
+            display: inline-block;
+
+        }
+
+        .post-heart {
+            font-weight: bold;
+            display: inline-block;
+            width: 10%;
+        }
+
+
+        .delete-check-box {
+            width: 50%;
+            height: 50%;
+            margin: 25%;
+            background-color: var(--color-4);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .delete-check-box>button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            width: 100px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: var(--color-3);
+            border: 1px solid var(--color-3);
+            color: var(--color-5);
+
+        }
+
+        button:hover {
+            border: 2px solid white;
+        }
     </style>
+
+
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/mypage/data",
+                data: {},
+                success: function (response) {
+                    console.log(response)
+                    const question_list = response['question_list'];
+                    const til_date_list = response['til_date_list']
+                    console.log(til_date_list)
+                    for (let i = 0; i < question_list.length; i++) {
+                        console.log(question_list[i]);
+                        let question_id = question_list[i]['question_id'];
+                        let main_ability = question_list[i]['main_ability'];
+                        let question_title = question_list[i]['question_title'];
+                        let q_heart_count = question_list[i]['q_heart_count'];
+
+                        let title = main_ability + ": " + question_title.substring(0, 20) + " ・・・・・"
+
+                        let temp_html = `<div class="one-post-line">
+                                            <div class="one-post-info" onclick="move_post(${question_id})">
+                                                <span class="post-num" style="display: inline-block">${i + 1}</span>
+                                                <span class="post-title">${title}</span>
+                                                <span class="post-heart"> 💛 ️${q_heart_count}</span>
+                                            </div>
+                                            <button onclick="post_update(${question_id})">수정</button>
+                                            <button onclick="post_delete_check(${question_id})">삭제</button>
+                                         </div>`
+
+
+                        $('.my-post-list').append(temp_html)
+                    }
+
+
+                    const now = new Date();
+                    const month_last_day = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                    const month_day_count = month_last_day.getDate();
+
+                    const now_day = now.getDate();
+                    console.log(now_day)
+                    console.log(month_day_count)
+
+
+                    let temp_html;
+                    for (let j = 1; j < month_day_count + 1; j++) {
+                        if (til_date_list.includes(j)) {
+                            temp_html = `<img class="til-circle" src='../static/img/green.png'>`
+                        } else if (j >= now_day) {
+                            temp_html = `<img class="til-circle" src='../static/img/x_gray.png'>`
+                        } else {
+                            temp_html = `<img class="til-circle" src='../static/img/x_black.png'>`
+                        }
+
+                        $('.til-graph').append(temp_html)
+                    }
+
+                }
+            })
+        })
+
+
+        function move_post(question_id) {
+            // 게시글로 이동
+             window.location.href = `/answer/${question_id}`
+
+        }
+
+        function post_update(question_id) {
+            // 게시글 수정 페이지로 이동
+        }
+
+
+        function post_delete_check(question_id) {
+            $('.body-header').hide();
+            $('.til-box').hide();
+            $('.submit-box').hide();
+            $('.my-post').hide();
+
+            let temp_html = `<div class="delete-check-box">
+                                 <p style="margin-bottom: 20px; font-size:15px; font-family: var(--font-point); color: var(--color-5)">정말 삭제하시겠습니까?</p>
+                                <button onclick="post_delete(${question_id})">삭제하기</button>
+                                <button onclick="window.location.reload()">취소하기</button>
+                              </div>`
+
+            $('.middle-box').html(temp_html)
+
+        }
+
+
+        function post_delete(question_id) {
+            $.ajax({
+                type: "POST",
+                url: "/mypage/deletion",
+                data: {
+                    'question_id': question_id
+                },
+                success: function (response) {
+                    if (response['message'] === "success") {
+                        alert("삭제가 완료되었습니다.")
+                        window.location.reload();
+                    } else {
+                        alert("다시 시도 해주세요.")
+                    }
+                }
+            })
+        }
+
+
+        function url_submit() {
+            url = $('#url-text').val()
+            console.log(url)
+            url_check = url.substring(0, 4)
+
+            if (url.length > 15 && url_check === "http") {
+                $.ajax({
+                    type: "POST",
+                    url: "/mypage/til/keeping",
+                    data: {
+                        'til_url': url,
+                        'til_count': {{ til_count }},
+        },
+        success: function (response) {
+            alert(response['message']);
+
+        }
+                })
+            } else {
+            let message = "정확한 링크를 등록해주세요!"
+            alert(message);
+        }
+
+        }
+
+
+    </script>
+    <!-- logout script  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="/static/js/logout.js"></script>
 </head>
+
 <body>
-myPage Test
+    <div class="container">
+        <div class="body-header">
+            <svg onclick="location.href='/'" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                fill=var(--color-5) class="bi-house" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                <path fill-rule="evenodd"
+                    d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+            </svg>
+            <span style="float: right; margin-top:65px; margin-right:10%; font-size: 20px"
+                onclick="logout()">logout</span>
+        </div>
+        <div class="middle-box">
+            <p style="font-size: 26px;font-family: var(--font-point); margin-left: 30px;"> {{ user_name }}님의 TIL 현황</p>
+
+            <div class="til-box">
+                <div class="graph-box">
+                    <p class="title">활동 그래프</p>
+                    <div class="til-graph">
+
+                    </div>
+                </div>
+                <div class="my-til-score">
+                    <p class="title">나의 TIL 점수</p>
+                    <div class="my-til-score-background">
+                        <img style="height: 9rem" src="/static/img/mypage_score.png">
+                        <p style="font-size: 30px; font-weight: bold;">{{ til_count }}</p>
+                    </div>
+                </div>
+                <div class="my-til-rank">
+                    <p class="title">나의 TIL 랭킹</p>
+                    <div class="my-til-rank-background">
+                        <img style="height: 9rem" src="/static/img/mypage_rank.png">
+                        <p>{{ til_rank }}</p>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="submit-box">
+                <p class="title" style="margin-top:20px; margin-left: 10px">오늘의 TIL 제출하기</p>
+                <div class="url-box">
+                    <input id="url-text" type="text" placeholder="링크를 제출해주세요." />
+                    <button onclick="url_submit()">제출하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="my-post">
+            <p class="title" style="margin-top: 60px; margin-left: 30px;"> 나의 게시글 목록</p>
+            <div class="my-post-list">
+            </div>
+        </div>
+
+    </div>
 </body>
+
 </html>
