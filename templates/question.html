@@ -94,7 +94,7 @@
               if (!(title && main && main_value)) {
                 return alert("내용이 작성되지 않은 곳이 있습니다. 확인해주세요!")
               } else if (confirm("게시글을 올리겠습니까?") == true){
-                alert("저장 완료!")
+                {#alert("저장 완료!")#}
               } else {
                 return
               }
@@ -105,7 +105,14 @@
                   url: '/question/question',
                   data: { question_title_give:title, question_detail_give:detail, main_ability_give:main},
                   success: function (response) {
-                      
+                      if(response['success'] === 'success'){
+                          alert(response['message'])
+                          window.location.href = "/bulletin-board/";
+                      }else{
+                          alert(response['message'])
+                          window.location.href = '/login'
+                      }
+
                   }
               });
            }

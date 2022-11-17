@@ -59,9 +59,25 @@ def api_valid():
 
 
         userinfo = db.users.find_one({'user_id': payload['user_id']}, {'_id': 0})
-        return jsonify({'result': 'success', 'user_name': userinfo['user_name']})
+        return jsonify({'result': 'success', 'user_id': userinfo['user_id']})
     except jwt.ExpiredSignatureError:
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
+def user_check():
+
+    token_receive = request.cookies.get('mytoken')
+
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        print(payload)
+
+        userinfo = db.users.find_one({'user_id': payload['user_id']}, {'_id': 0})
+        return {'result': 'success', 'user_id': payload['user_id']}
+
+    except jwt.ExpiredSignatureError:
+        return {'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'}
+
+    except jwt.exceptions.DecodeError:
+        return {'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'}
